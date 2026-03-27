@@ -1,0 +1,2064 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PUBG 완전 정복 가이드 — 배틀그라운드 올인원</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Orbitron:wght@400;700;900&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #f0c040;
+  --gold-dim: #c89a20;
+  --gold-glow: rgba(240,192,64,0.25);
+  --red: #e03030;
+  --red-dim: rgba(224,48,48,0.15);
+  --teal: #44ccaa;
+  --purple: #a880ff;
+  --blue: #4488ff;
+  --bg: #080a0c;
+  --bg2: #0d1015;
+  --bg3: #141820;
+  --bg4: #1a2028;
+  --border: rgba(240,192,64,0.15);
+  --border2: rgba(255,255,255,0.07);
+  --text: #e8e4d8;
+  --text-dim: #7a7568;
+  --text-mid: #b0aa9a;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Sans KR', sans-serif;
+  overflow-x: hidden;
+  cursor: crosshair;
+}
+
+/* ═══════════════ SCROLLBAR ═══════════════ */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: var(--gold-dim); }
+
+/* ═══════════════ NAVBAR ═══════════════ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: rgba(8,10,12,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  height: 52px;
+  display: flex;
+  align-items: center;
+  padding: 0 28px;
+  gap: 0;
+}
+
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem;
+  letter-spacing: 0.12em;
+  color: var(--gold);
+  margin-right: 32px;
+  white-space: nowrap;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  flex: 1;
+}
+.nav-links::-webkit-scrollbar { display: none; }
+
+.nav-link {
+  font-family: 'Orbitron', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--text-dim);
+  text-decoration: none;
+  padding: 0 14px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+.nav-link:hover { color: var(--gold); border-bottom-color: var(--gold); }
+
+/* ═══════════════ HERO ═══════════════ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  padding-top: 52px;
+}
+
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 70% 45% at 50% 55%, rgba(240,192,64,0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 30% at 20% 80%, rgba(68,204,170,0.04) 0%, transparent 60%),
+    linear-gradient(180deg, #080a0c 0%, #0d1015 100%);
+}
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 49px, rgba(240,192,64,0.03) 49px, rgba(240,192,64,0.03) 50px),
+    repeating-linear-gradient(90deg, transparent, transparent 49px, rgba(240,192,64,0.03) 49px, rgba(240,192,64,0.03) 50px);
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 24px;
+}
+
+.hero-eyebrow {
+  font-family: 'Orbitron', monospace;
+  font-size: 10px;
+  letter-spacing: 0.45em;
+  color: var(--gold);
+  border: 1px solid var(--border);
+  padding: 6px 20px;
+  display: inline-block;
+  margin-bottom: 32px;
+  text-transform: uppercase;
+  animation: fadeUp 0.7s ease both;
+}
+
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(5rem, 14vw, 11rem);
+  line-height: 0.88;
+  letter-spacing: 0.04em;
+  color: #fff;
+  animation: fadeUp 0.7s 0.1s ease both;
+}
+.hero-title .accent { color: var(--gold); display: block; }
+
+.hero-subtitle {
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-top: 24px;
+  letter-spacing: 0.08em;
+  line-height: 1.9;
+  animation: fadeUp 0.7s 0.2s ease both;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 56px;
+  margin-top: 56px;
+  justify-content: center;
+  animation: fadeUp 0.7s 0.35s ease both;
+}
+.hero-stat-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 3.2rem;
+  letter-spacing: 0.04em;
+  color: var(--gold);
+  display: block;
+  line-height: 1;
+}
+.hero-stat-label {
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  margin-top: 6px;
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 36px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  font-family: 'Orbitron', monospace;
+  font-size: 9px; letter-spacing: 0.3em; color: var(--text-dim);
+  text-transform: uppercase;
+  animation: fadeUp 0.7s 0.5s ease both;
+}
+.scroll-line {
+  width: 1px; height: 44px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: scrollPulse 1.6s ease-in-out infinite;
+}
+
+/* ═══════════════ SECTION WRAPPER ═══════════════ */
+.section-wrap {
+  padding: 90px 28px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.section-head {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 56px;
+}
+.section-num {
+  font-family: 'Orbitron', monospace;
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 0.3em;
+  opacity: 0.5;
+}
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  letter-spacing: 0.06em;
+  color: #fff;
+}
+.section-line { flex: 1; height: 1px; background: var(--border); }
+
+/* ═══════════════ BASICS CARDS ═══════════════ */
+.basics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2px;
+}
+
+.basic-card {
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  padding: 28px 24px;
+  transition: border-color 0.2s, background 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.basic-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--card-accent, var(--gold));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s;
+}
+.basic-card:hover::before { transform: scaleX(1); }
+.basic-card:hover { border-color: var(--border); background: var(--bg4); }
+
+.basic-icon { font-size: 2rem; margin-bottom: 14px; }
+.basic-name {
+  font-family: 'Orbitron', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.basic-desc {
+  font-size: 13px;
+  line-height: 1.85;
+  color: var(--text-dim);
+}
+.basic-desc strong { color: var(--text-mid); }
+
+/* ═══════════════ MAPS MOSAIC ═══════════════ */
+.maps-mosaic {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+.map-tile {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--bg3);
+}
+.map-tile img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: saturate(0.85) brightness(0.75);
+  transition: filter 0.4s ease, transform 0.5s ease;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+.map-tile:hover img {
+  filter: saturate(1.1) brightness(0.95);
+  transform: scale(1.05);
+}
+.map-tile-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.1) 50%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 18px 16px;
+  transition: background 0.3s;
+}
+.map-tile:hover .map-tile-overlay {
+  background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.35) 60%, transparent 100%);
+}
+.map-tile-status {
+  font-family: 'Orbitron', monospace;
+  font-size: 8px;
+  letter-spacing: 0.25em;
+  padding: 3px 9px;
+  border: 1px solid;
+  width: fit-content;
+  margin-bottom: 7px;
+  text-transform: uppercase;
+}
+.status-active { border-color: var(--teal); color: var(--teal); }
+.status-ranked { border-color: var(--gold); color: var(--gold); }
+.status-rotation { border-color: var(--text-dim); color: var(--text-dim); }
+
+.map-tile-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem;
+  letter-spacing: 0.06em;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.map-tile-region {
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.8;
+  margin-bottom: 8px;
+}
+.map-tile-meta {
+  display: flex; gap: 12px; flex-wrap: wrap;
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.35s ease, opacity 0.3s;
+  opacity: 0;
+}
+.map-tile:hover .map-tile-meta { max-height: 60px; opacity: 1; }
+.map-tile-meta span {
+  font-size: 10px; color: var(--text-dim);
+  display: flex; align-items: center; gap: 4px;
+}
+.map-zoom-hint {
+  position: absolute; top: 10px; right: 10px;
+  background: rgba(0,0,0,0.6);
+  border: 1px solid var(--border);
+  padding: 4px 7px;
+  font-size: 9px;
+  font-family: 'Orbitron', monospace;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.map-tile:hover .map-zoom-hint { opacity: 1; }
+
+/* ═══════════════ MAP DETAIL ROWS ═══════════════ */
+.map-detail-row {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 44px;
+  align-items: start;
+  padding: 56px 0;
+  border-bottom: 1px solid var(--border);
+}
+.map-detail-row:last-child { border-bottom: none; }
+.map-detail-row.rev { direction: rtl; }
+.map-detail-row.rev > * { direction: ltr; }
+
+.map-detail-img-wrap {
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  aspect-ratio: 1;
+  background: var(--bg3);
+}
+.map-detail-img-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: saturate(0.95);
+  transition: filter 0.4s, transform 0.5s;
+  image-rendering: -webkit-optimize-contrast;
+}
+.map-detail-img-wrap:hover img {
+  filter: saturate(1.1) brightness(1.05);
+  transform: scale(1.03);
+}
+.map-detail-badge {
+  position: absolute; top: 12px; left: 12px;
+  font-family: 'Orbitron', monospace;
+  font-size: 8px; letter-spacing: 0.3em;
+  padding: 5px 12px;
+  text-transform: uppercase;
+}
+.badge-active { background: rgba(68,204,170,0.18); border: 1px solid var(--teal); color: var(--teal); }
+.badge-ranked { background: rgba(240,192,64,0.18); border: 1px solid var(--gold); color: var(--gold); }
+.badge-small  { background: rgba(168,136,255,0.18); border: 1px solid var(--purple); color: var(--purple); }
+
+.map-click-hint {
+  position: absolute; bottom: 10px; right: 10px;
+  background: rgba(0,0,0,0.75);
+  border: 1px solid var(--border);
+  padding: 5px 10px;
+  font-size: 9px; font-family: 'Orbitron', monospace;
+  letter-spacing: 0.15em; color: var(--gold);
+}
+
+.map-detail-content h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.8rem; letter-spacing: 0.05em;
+  color: #fff; line-height: 1; margin-bottom: 4px;
+}
+.map-region-label {
+  font-size: 10px; color: var(--gold);
+  letter-spacing: 0.2em; text-transform: uppercase;
+  margin-bottom: 20px; display: block;
+}
+.map-detail-content p {
+  font-size: 13.5px; line-height: 1.95;
+  color: var(--text-dim); margin-bottom: 14px;
+}
+.map-detail-content p strong { color: var(--text-mid); }
+
+.map-specs {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 10px; margin: 22px 0;
+}
+.spec {
+  background: var(--bg3); border: 1px solid var(--border2);
+  padding: 11px 15px;
+}
+.spec-label {
+  font-size: 9px; letter-spacing: 0.2em; color: var(--text-dim);
+  text-transform: uppercase; margin-bottom: 4px;
+}
+.spec-val {
+  font-family: 'Orbitron', monospace;
+  font-size: 13px; font-weight: 700; color: var(--gold);
+}
+
+.tags-wrap { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 18px; }
+.tag-pill {
+  font-size: 10px; padding: 4px 12px;
+  background: rgba(240,192,64,0.07);
+  border: 1px solid rgba(240,192,64,0.22);
+  color: var(--gold); letter-spacing: 0.05em;
+}
+.tag-pill.danger {
+  background: rgba(224,48,48,0.07);
+  border-color: rgba(224,48,48,0.28); color: #f06060;
+}
+.tag-pill.safe {
+  background: rgba(68,204,170,0.07);
+  border-color: rgba(68,204,170,0.28); color: var(--teal);
+}
+.tag-pill.special {
+  background: rgba(168,136,255,0.07);
+  border-color: rgba(168,136,255,0.28); color: var(--purple);
+}
+
+/* ═══════════════ FILTER TABS ═══════════════ */
+.filter-bar {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  margin-bottom: 36px;
+}
+.ftab {
+  font-family: 'Orbitron', monospace;
+  font-size: 9px; letter-spacing: 0.2em;
+  padding: 8px 16px;
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: uppercase;
+}
+.ftab:hover { border-color: var(--border); color: var(--text-mid); }
+.ftab.active {
+  background: rgba(240,192,64,0.1);
+  border-color: var(--gold); color: var(--gold);
+}
+
+/* ═══════════════ ITEM CARDS (weapons, vehicles, etc) ═══════════════ */
+.items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 2px;
+}
+
+.item-card {
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  padding: 18px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+.item-card:hover {
+  background: var(--bg4);
+  border-color: rgba(240,192,64,0.3);
+}
+.item-card:hover .item-img { transform: scale(1.07); }
+
+.item-img-wrap {
+  width: 100%; height: 120px;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; margin-bottom: 12px;
+  background: var(--bg2);
+}
+.item-img {
+  max-width: 100%; max-height: 110px;
+  width: auto; height: auto;
+  object-fit: contain;
+  transition: transform 0.3s;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+.item-name {
+  font-family: 'Orbitron', monospace;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.1em; color: var(--text);
+  margin-bottom: 4px;
+}
+.item-sub {
+  font-size: 11px; color: var(--text-dim); line-height: 1.5;
+}
+.item-badge {
+  position: absolute; top: 8px; right: 8px;
+  font-family: 'Orbitron', monospace;
+  font-size: 7px; letter-spacing: 0.15em;
+  padding: 2px 7px;
+}
+.badge-airdrop { background: rgba(224,48,48,0.2); border: 1px solid #e03030; color: #f07070; }
+.badge-new { background: rgba(68,204,170,0.2); border: 1px solid var(--teal); color: var(--teal); }
+.badge-world { background: rgba(168,136,255,0.2); border: 1px solid var(--purple); color: var(--purple); }
+
+/* ═══════════════ VEHICLE CARDS ═══════════════ */
+.vehicles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 2px;
+}
+
+.vehicle-card {
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  cursor: pointer;
+  transition: all 0.25s;
+  overflow: hidden;
+}
+.vehicle-card:hover {
+  background: var(--bg4);
+  border-color: rgba(240,192,64,0.3);
+}
+
+.vehicle-img-area {
+  width: 100%; height: 160px;
+  background: var(--bg2);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.vehicle-img-area img {
+  max-width: 95%; max-height: 150px;
+  width: auto; height: auto;
+  object-fit: contain;
+  transition: transform 0.35s;
+  image-rendering: -webkit-optimize-contrast;
+}
+.vehicle-card:hover .vehicle-img-area img {
+  transform: scale(1.08);
+}
+.vehicle-info {
+  padding: 14px 16px;
+}
+.vehicle-name {
+  font-family: 'Orbitron', monospace;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.12em; color: var(--text);
+  margin-bottom: 4px; text-transform: uppercase;
+}
+.vehicle-meta { font-size: 11px; color: var(--text-dim); line-height: 1.55; }
+
+/* ═══════════════ ATTACHMENT CARDS ═══════════════ */
+.attach-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 2px;
+}
+.attach-card {
+  background: var(--bg3); border: 1px solid var(--border2);
+  padding: 16px; cursor: pointer; transition: all 0.2s;
+  display: flex; gap: 14px; align-items: center;
+}
+.attach-card:hover { background: var(--bg4); border-color: var(--border); }
+.attach-img-wrap {
+  width: 88px; height: 64px; flex-shrink: 0;
+  background: var(--bg2);
+  display: flex; align-items: center; justify-content: center;
+}
+.attach-img-wrap img {
+  max-width: 84px; max-height: 60px;
+  width: auto; height: auto;
+  object-fit: contain;
+  transition: transform 0.2s;
+  image-rendering: -webkit-optimize-contrast;
+}
+.attach-card:hover .attach-img-wrap img { transform: scale(1.08); }
+.attach-text {}
+.attach-name {
+  font-family: 'Orbitron', monospace;
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.1em; color: var(--text);
+  margin-bottom: 3px; text-transform: uppercase;
+}
+.attach-sub { font-size: 10.5px; color: var(--text-dim); line-height: 1.5; }
+
+/* ═══════════════ GEAR/HEAL GRID ═══════════════ */
+.gear-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 2px;
+}
+.gear-card {
+  background: var(--bg3); border: 1px solid var(--border2);
+  padding: 20px 16px; cursor: pointer; transition: all 0.2s;
+  text-align: center;
+}
+.gear-card:hover { background: var(--bg4); border-color: var(--border); }
+.gear-card:hover .gear-img { transform: scale(1.1); }
+.gear-img-wrap {
+  width: 100%; height: 100px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bg2); margin-bottom: 12px;
+}
+.gear-img {
+  max-width: 90%; max-height: 90px;
+  width: auto; height: auto;
+  object-fit: contain; transition: transform 0.3s;
+  image-rendering: -webkit-optimize-contrast;
+}
+.gear-name {
+  font-family: 'Orbitron', monospace;
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.12em; color: var(--text);
+  margin-bottom: 4px; text-transform: uppercase;
+}
+.gear-sub { font-size: 10.5px; color: var(--text-dim); }
+
+/* ═══════════════ NOTICE BAR ═══════════════ */
+.notice-bar {
+  background: rgba(240,192,64,0.06);
+  border: 1px solid rgba(240,192,64,0.22);
+  border-left: 3px solid var(--gold);
+  padding: 16px 22px;
+  margin: 0 28px 56px;
+  max-width: 1384px;
+  margin-left: auto; margin-right: auto;
+  display: flex; align-items: center; gap: 14px;
+  font-size: 13px; color: var(--text-dim); line-height: 1.7;
+}
+.notice-bar strong { color: var(--gold); }
+.notice-icon { font-size: 20px; flex-shrink: 0; }
+
+/* ═══════════════ LIGHTBOX ═══════════════ */
+#lightbox {
+  display: none; position: fixed; inset: 0; z-index: 9999;
+  background: rgba(0,0,0,0.97);
+  backdrop-filter: blur(16px);
+  align-items: center; justify-content: center; flex-direction: column;
+  cursor: zoom-out;
+}
+#lightbox.active { display: flex; }
+#lightbox.active .lb-img { animation: lbIn 0.22s ease both; }
+
+.lb-close {
+  position: fixed; top: 18px; right: 26px;
+  font-size: 2rem; color: var(--gold);
+  cursor: pointer; z-index: 10000; line-height: 1;
+  font-family: 'Orbitron', monospace;
+}
+.lb-img-wrap {
+  max-width: 96vw; max-height: 86vh;
+  display: flex; align-items: center; justify-content: center;
+}
+.lb-img {
+  max-width: 94vw; max-height: 84vh;
+  width: auto; height: auto;
+  object-fit: contain;
+  border: 1px solid rgba(240,192,64,0.25);
+  box-shadow: 0 0 80px rgba(240,192,64,0.12);
+  cursor: default;
+  image-rendering: -webkit-optimize-contrast;
+}
+.lb-caption {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem; letter-spacing: 0.12em;
+  color: var(--gold); margin-top: 14px; text-align: center;
+}
+.lb-sub { font-size: 12px; color: var(--text-dim); margin-top: 4px; letter-spacing: 0.08em; }
+.lb-nav {
+  position: fixed;
+  top: 50%; transform: translateY(-50%);
+  font-size: 2rem; color: var(--gold);
+  cursor: pointer; background: rgba(0,0,0,0.5);
+  border: 1px solid var(--border);
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Orbitron', monospace;
+  transition: background 0.2s;
+  z-index: 10000;
+}
+.lb-nav:hover { background: rgba(240,192,64,0.15); }
+.lb-prev { left: 16px; }
+.lb-next { right: 16px; }
+
+@keyframes lbIn {
+  from { opacity: 0; transform: scale(0.94); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ═══════════════ FOOTER ═══════════════ */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 44px 28px; text-align: center;
+  font-size: 12px; color: var(--text-dim); line-height: 2;
+  max-width: 1440px; margin: 0 auto;
+}
+footer strong { color: var(--gold); }
+
+/* ═══════════════ ANIMATIONS ═══════════════ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.35; }
+  50%       { opacity: 1; }
+}
+
+/* ═══════════════ RESPONSIVE ═══════════════ */
+@media (max-width: 900px) {
+  .maps-mosaic { grid-template-columns: repeat(2, 1fr); }
+  .map-detail-row { grid-template-columns: 1fr; }
+  .map-detail-row.rev { direction: ltr; }
+}
+@media (max-width: 640px) {
+  .maps-mosaic { grid-template-columns: 1fr 1fr; }
+  .hero-stats { gap: 28px; }
+  .hero-stat-num { font-size: 2.4rem; }
+  .nav-links { gap: 0; }
+  .section-wrap { padding: 60px 16px; }
+  .items-grid { grid-template-columns: repeat(2, 1fr); }
+  .vehicles-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 400px) {
+  .maps-mosaic { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ NAVBAR ═══════════ -->
+<nav>
+  <div class="nav-logo">PUBG GUIDE</div>
+  <div class="nav-links">
+    <a class="nav-link" href="#basics">기초</a>
+    <a class="nav-link" href="#maps">맵</a>
+    <a class="nav-link" href="#map-details">맵 상세</a>
+    <a class="nav-link" href="#weapons">무기</a>
+    <a class="nav-link" href="#attachments">부착물</a>
+    <a class="nav-link" href="#vehicles">차량</a>
+    <a class="nav-link" href="#armor">방어구</a>
+    <a class="nav-link" href="#healing">회복</a>
+    <a class="nav-link" href="#throwables">투척물</a>
+  </div>
+</nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">외국인 운영 배틀그라운드 서버 · Official Guide</div>
+    <h1 class="hero-title">
+      PUBG
+      <span class="accent">완전 정복</span>
+    </h1>
+    <p class="hero-subtitle">
+      맵 · 무기 · 차량 · 장비 · 부착물 · 투척물 완전 분석<br>
+      Maps · Weapons · Vehicles · Gear · Attachments · Throwables
+    </p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="hero-stat-num">9</span>
+        <div class="hero-stat-label">Maps</div>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">40+</span>
+        <div class="hero-stat-label">Weapons</div>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">15+</span>
+        <div class="hero-stat-label">Vehicles</div>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">100</span>
+        <div class="hero-stat-label">Players</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    Scroll
+  </div>
+</section>
+
+<!-- ═══════════ SECTION 1: BASICS ═══════════ -->
+<section id="basics" class="section-wrap">
+  <div class="section-head">
+    <span class="section-num">01</span>
+    <h2 class="section-title">배그 기초 개념</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="basics-grid">
+    <div class="basic-card" style="--card-accent: var(--blue)">
+      <div class="basic-icon">🔵</div>
+      <div class="basic-name">블루존 (Blue Zone)</div>
+      <div class="basic-desc">
+        <strong>전기장</strong>으로 줄어드는 안전 구역 경계선입니다. 블루존 밖에 있으면 지속적으로 체력이 감소합니다. 게임이 진행될수록 점점 빠르게 줄어들며 데미지도 증가합니다.
+      </div>
+    </div>
+    <div class="basic-card" style="--card-accent: var(--red)">
+      <div class="basic-icon">🔴</div>
+      <div class="basic-name">레드존 (Red Zone)</div>
+      <div class="basic-desc">
+        <strong>폭격 구역</strong>으로 랜덤하게 지도 위에 나타납니다. 해당 구역 안에 있으면 폭탄에 맞아 즉사할 수 있습니다. 건물 내부에 있거나 빠르게 이동하는 것이 안전합니다.
+      </div>
+    </div>
+    <div class="basic-card" style="--card-accent: var(--gold)">
+      <div class="basic-icon">📦</div>
+      <div class="basic-name">케어패키지 (Care Package)</div>
+      <div class="basic-desc">
+        <strong>에어드롭</strong>이라고도 불리며, 비행기에서 떨어지는 보급 상자입니다. <strong>AWM, Groza, M249</strong> 등 에어드롭 전용 무기와 강력한 장비가 들어있어 많은 플레이어가 노립니다.
+      </div>
+    </div>
+    <div class="basic-card" style="--card-accent: var(--red)">
+      <div class="basic-icon">🔥</div>
+      <div class="basic-name">핫드롭 (Hot Drop)</div>
+      <div class="basic-desc">
+        게임 시작 시 <strong>많은 플레이어가 동시에 낙하</strong>하는 인기 지역입니다. 루팅 경쟁이 치열하고 초반 교전이 많아 고위험/고보상 전략입니다.
+      </div>
+    </div>
+    <div class="basic-card" style="--card-accent: var(--teal)">
+      <div class="basic-icon">🎯</div>
+      <div class="basic-name">화이트존 (White Zone)</div>
+      <div class="basic-desc">
+        <strong>다음 안전 구역</strong>을 표시하는 흰색 원입니다. 게임이 진행되면서 블루존이 화이트존까지 줄어듭니다. 이동 계획 수립의 기준점입니다.
+      </div>
+    </div>
+    <div class="basic-card" style="--card-accent: var(--purple)">
+      <div class="basic-icon">🪂</div>
+      <div class="basic-name">낙하/점프 (Drop)</div>
+      <div class="basic-desc">
+        게임 시작 시 비행기에서 <strong>원하는 위치로 낙하</strong>합니다. 적보다 먼저 착지해 루팅하는 것이 유리하며, 착지 각도와 시점이 중요합니다.
+      </div>
+    </div>
+    <div class="basic-card" style="--card-accent: var(--gold)">
+      <div class="basic-icon">💊</div>
+      <div class="basic-name">부스터 (Boost)</div>
+      <div class="basic-desc">
+        <strong>에너지 드링크, 진통제</strong> 등을 사용하면 일정 시간 동안 체력이 자동 회복됩니다. 부스터가 꽉 차있을수록 빠른 속도로 체력이 오릅니다.
+      </div>
+    </div>
+    <div class="basic-card" style="--card-accent: var(--teal)">
+      <div class="basic-icon">🏠</div>
+      <div class="basic-name">루팅 (Looting)</div>
+      <div class="basic-desc">
+        건물이나 죽은 적의 시체에서 <strong>무기, 아이템, 탄약을 수집</strong>하는 행위입니다. 효율적인 루팅은 생존의 핵심으로, 루트 동선 최적화가 중요합니다.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SECTION 2: MAPS OVERVIEW ═══════════ -->
+<section id="maps" class="section-wrap">
+  <div class="section-head">
+    <span class="section-num">02</span>
+    <h2 class="section-title">전체 맵 목록</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="maps-mosaic">
+
+    <!-- ERANGEL -->
+    <div class="map-tile" onclick="openLB('https://media.githubusercontent.com/media/pubg/api-assets/master/Assets/Maps/Erangel_Main_High_Res.png','ERANGEL','8×8km · 러시아 섬 지형 · 클래식 맵')">
+      <img src="https://media.githubusercontent.com/media/pubg/api-assets/master/Assets/Maps/Erangel_Main_High_Res.png" alt="Erangel"https://placehold.co/400x400/080a0c/f0c040?text=ERANGEL'" loading="lazy" decoding="async">
+      <div class="map-tile-overlay">
+        <span class="map-tile-status status-active">● ACTIVE</span>
+        <div class="map-tile-name">ERANGEL</div>
+        <div class="map-tile-region">🇷🇺 Russia — 에란겔</div>
+        <div class="map-tile-meta">
+          <span>📐 8×8 km</span>
+          <span>👥 100명</span>
+          <span>🏆 랭크 지원</span>
+        </div>
+      </div>
+      <div class="map-zoom-hint">🔍 CLICK</div>
+    </div>
+
+    <!-- MIRAMAR -->
+    <div class="map-tile" onclick="openLB('https://media.githubusercontent.com/media/pubg/api-assets/master/Assets/Maps/Miramar_Main_High_Res.png','MIRAMAR','8×8km · 멕시코 사막 지형 · 저격 천국')">
+      <img src="https://media.githubusercontent.com/media/pubg/api-assets/master/Assets/Maps/Miramar_Main_High_Res.png" alt="Miramar"https://placehold.co/400x400/080a0c/f0c040?text=MIRAMAR'" loading="lazy" decoding="async">
+      <div class="map-tile-overlay">
+        <span class="map-tile-status status-active">● ACTIVE</span>
+        <div class="map-tile-name">MIRAMAR</div>
+        <div class="map-tile-region">🇲🇽 Mexico — 미라마</div>
+        <div class="map-tile-meta">
+          <span>📐 8×8 km</span>
+          <span>🏜️ 사막 지형</span>
+          <span>🔭 저격 유리</span>
+        </div>
+      </div>
+      <div class="map-zoom-hint">🔍 CLICK</div>
+    </div>
+
+    <!-- SANHOK -->
+    <div class="map-tile" onclick="openLB('https://media.githubusercontent.com/media/pubg/api-assets/master/Assets/Maps/Sanhok_Main_High_Res.png','SANHOK','4×4km · 태국 열대 정글 · 빠른 게임')">
+      <img src="https://media.githubusercontent.com/media/pubg/api-assets/master/Assets/Maps/Sanhok_Main_High_Res.png" alt="Sanhok"https://placehold.co/400x400/080a0c/f0c040?text=SANHOK'" loading="lazy" decoding="async">
+      <div class="map-tile-overlay">
+        <span class="map-tile-status status-active">● ACTIVE</span>
+        <div class="map-tile-name">SANHOK</div>
+        <div class="map-tile-region">🇹🇭 Thailand — 사녹</div>
+        <div class="map-tile-meta">
+          <span>📐 4×4 km</span>
+          <span>🌴 밀림</span>
+          <span>⚡ 빠른 템포</span>
+        </div>
+      </div>
+      <div class="map-zoom-hint">🔍 CLICK</div>
+    </div>
+
+    <!-- VIKENDI -->
+    <div class="map-tile" onclick="openLB('https://media.githubusercontent.com/media/pubg/api-assets/master/Assets/Maps/Vikendi_Main_High_Res.png','VIKENDI','6×6km · 동유럽 설원 · 발자국 추적')">
+      <img src="https://media.githubusercontent.com/media/pubg/api-assets/master/Assets/Maps/Vikendi_Main_High_Res.png" alt="Vikendi"https://placehold.co/400x400/080a0c/f0c040?text=VIKENDI'" loading="lazy" decoding="async">
+      <div class="map-tile-overlay">
+        <span class="map-tile-status status-rotation">◎ ROTATION</span>
+        <div class="map-tile-name">VIKENDI</div>
+        <div class="map-tile-region">🏔️ Eastern Europe — 비켄디</div>
+        <div class="map-tile-meta">
+          <span>📐 6×6 km</span>
+          <span>❄️ 설원</span>
+          <span>👣 발자국</span>
+        </div>
+      </div>
+      <div class="map-zoom-hint">🔍 CLICK</div>
+    </div>
+
+    <!-- TAEGO -->
+    <div class="map-tile" onclick="openLB('https://media.githubusercontent.com/media/pubg/api-assets/master/Assets/Maps/Taego_Main_High_Res.png','TAEGO','8×8km · 한국 지형 · 자기소생')">
+      <img src="https://media.githubusercontent.com/media/pubg/api-assets/master/Assets/Maps/Taego_Main_High_Res.png" alt="Taego"https://placehold.co/400x400/080a0c/f0c040?text=TAEGO'" loading="lazy" decoding="async">
+      <div class="map-tile-overlay">
+        <span class="map-tile-status status-active">● ACTIVE</span>
+        <div class="map-tile-name">TAEGO</div>
+        <div class="map-tile-region">🇰🇷 Korea — 태이고</div>
+        <div class="map-tile-meta">
+          <span>📐 8×8 km</span>
+          <span>🔄 자기소생</span>
+          <span>🏆 랭크 지원</span>
+        </div>
+      </div>
+      <div class="map-zoom-hint">🔍 CLICK</div>
+    </div>
+
+    <!-- DESTON -->
+    <div class="map-tile" onclick="openLB('https://media.githubusercontent.com/media/pubg/api-assets/master/Assets/Maps/Deston_Main_High_Res.png','DESTON','8×8km · 미래 도시 · 수직 전투')">
+      <img src="https://media.githubusercontent.com/media/pubg/api-assets/master/Assets/Maps/Deston_Main_High_Res.png" alt="Deston"https://placehold.co/400x400/080a0c/f0c040?text=DESTON'" loading="lazy" decoding="async">
+      <div class="map-tile-overlay">
+        <span class="map-tile-status status-active">● ACTIVE</span>
+        <div class="map-tile-name">DESTON</div>
+        <div class="map-tile-region">🏙️ Futuristic USA — 데스톤</div>
+        <div class="map-tile-meta">
+          <span>📐 8×8 km</span>
+          <span>🏗️ 고층 건물</span>
+          <span>🚁 수직 전투</span>
+        </div>
+      </div>
+      <div class="map-zoom-hint">🔍 CLICK</div>
+    </div>
+
+    <!-- KARAKIN -->
+    <div class="map-tile" onclick="openLB('https://media.githubusercontent.com/media/pubg/api-assets/master/Assets/Maps/Karakin_Main_High_Res.png','KARAKIN','2×2km · 북아프리카 · 블랙존')">
+      <img src="https://media.githubusercontent.com/media/pubg/api-assets/master/Assets/Maps/Karakin_Main_High_Res.png" alt="Karakin"https://placehold.co/400x400/080a0c/f0c040?text=KARAKIN'" loading="lazy" decoding="async">
+      <div class="map-tile-overlay">
+        <span class="map-tile-status status-rotation">◎ ROTATION</span>
+        <div class="map-tile-name">KARAKIN</div>
+        <div class="map-tile-region">🌍 North Africa — 카라킨</div>
+        <div class="map-tile-meta">
+          <span>📐 2×2 km</span>
+          <span>💥 블랙존</span>
+          <span>⚡ 최소 맵</span>
+        </div>
+      </div>
+      <div class="map-zoom-hint">🔍 CLICK</div>
+    </div>
+
+    <!-- RONDO -->
+    <div class="map-tile" onclick="openLB('https://media.githubusercontent.com/media/pubg/api-assets/master/Assets/Maps/Rondo_Main_High_Res.png','RONDO','8×8km · 동남아시아 · 수중 지형')">
+      <img src="https://media.githubusercontent.com/media/pubg/api-assets/master/Assets/Maps/Rondo_Main_High_Res.png" alt="Rondo"https://placehold.co/400x400/080a0c/f0c040?text=RONDO'" loading="lazy" decoding="async">
+      <div class="map-tile-overlay">
+        <span class="map-tile-status status-active">● ACTIVE</span>
+        <div class="map-tile-name">RONDO</div>
+        <div class="map-tile-region">🌊 Southeast Asia — 론도</div>
+        <div class="map-tile-meta">
+          <span>📐 8×8 km</span>
+          <span>🌊 수중전</span>
+          <span>🏝️ 군도</span>
+        </div>
+      </div>
+      <div class="map-zoom-hint">🔍 CLICK</div>
+    </div>
+
+    <!-- PARAMO -->
+    <div class="map-tile" onclick="openLB('https://media.githubusercontent.com/media/pubg/api-assets/master/Assets/Maps/Paramo_Main_High_Res.png','PARAMO','3×3km · 안데스 고원 · 다이나믹 맵')">
+      <img src="https://media.githubusercontent.com/media/pubg/api-assets/master/Assets/Maps/Paramo_Main_High_Res.png" alt="Paramo"https://placehold.co/400x400/080a0c/f0c040?text=PARAMO'" loading="lazy" decoding="async">
+      <div class="map-tile-overlay">
+        <span class="map-tile-status status-rotation">◎ ROTATION</span>
+        <div class="map-tile-name">PARAMO</div>
+        <div class="map-tile-region">⛰️ Andes — 파라모</div>
+        <div class="map-tile-meta">
+          <span>📐 3×3 km</span>
+          <span>🌋 화산 지형</span>
+          <span>🔄 다이나믹</span>
+        </div>
+      </div>
+      <div class="map-zoom-hint">🔍 CLICK</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════ SECTION 3: MAP DETAILS ═══════════ -->
+<section id="map-details" class="section-wrap">
+  <div class="section-head">
+    <span class="section-num">03</span>
+    <h2 class="section-title">맵 상세 분석</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <!-- ERANGEL -->
+  <div class="map-detail-row">
+    <div class="map-detail-img-wrap" onclick="openLB('https://media.githubusercontent.com/media/pubg/api-assets/master/Assets/Maps/Erangel_Main_High_Res.png','ERANGEL','8×8km · 클래식 배틀그라운드 원조 맵')">
+      <img src="https://media.githubusercontent.com/media/pubg/api-assets/master/Assets/Maps/Erangel_Main_High_Res.png" alt="Erangel"https://placehold.co/600x600/080a0c/f0c040?text=ERANGEL'" loading="lazy" decoding="async">
+      <span class="map-detail-badge badge-active">● RANKED</span>
+      <div class="map-click-hint">🔍 클릭하면 크게 보입니다</div>
+    </div>
+    <div class="map-detail-content">
+      <h3>ERANGEL</h3>
+      <span class="map-region-label">🇷🇺 러시아 섬 지형 — 클래식 맵</span>
+      <p>배틀그라운드의 <strong>원조 맵</strong>이자 가장 상징적인 무대입니다. 군사기지, 농장, 학교, 병원 등 다양한 포인트가 밀집되어 있으며 다리 전투가 특징입니다.</p>
+      <p><strong>군사기지</strong>는 고급 루트 스팟이지만 섬으로 이어지는 두 개의 다리는 병목 지점이 됩니다. 초보자와 고수 모두에게 추천되는 균형 잡힌 맵입니다.</p>
+      <div class="map-specs">
+        <div class="spec"><div class="spec-label">맵 크기</div><div class="spec-val">8 × 8 km</div></div>
+        <div class="spec"><div class="spec-label">최대 인원</div><div class="spec-val">100명</div></div>
+        <div class="spec"><div class="spec-label">지형</div><div class="spec-val">초원 + 도시</div></div>
+        <div class="spec"><div class="spec-label">랭크 지원</div><div class="spec-val">✓ YES</div></div>
+      </div>
+      <div class="tags-wrap">
+        <span class="tag-pill danger">🔥 학교</span>
+        <span class="tag-pill danger">🔥 군사기지</span>
+        <span class="tag-pill danger">🔥 Pochinki</span>
+        <span class="tag-pill safe">✓ 농장</span>
+        <span class="tag-pill safe">✓ Lipovka</span>
+        <span class="tag-pill special">🌉 다리 전투</span>
+        <span class="tag-pill special">🏆 랭크 맵</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MIRAMAR -->
+  <div class="map-detail-row rev">
+    <div class="map-detail-img-wrap" onclick="openLB('https://media.githubusercontent.com/media/pubg/api-assets/master/Assets/Maps/Miramar_Main_High_Res.png','MIRAMAR','8×8km · 사막 지형 · 저격 천국')">
+      <img src="https://media.githubusercontent.com/media/pubg/api-assets/master/Assets/Maps/Miramar_Main_High_Res.png" alt="Miramar"https://placehold.co/600x600/080a0c/f0c040?text=MIRAMAR'" loading="lazy" decoding="async">
+      <span class="map-detail-badge badge-active">● ACTIVE</span>
+      <div class="map-click-hint">🔍 클릭하면 크게 보입니다</div>
+    </div>
+    <div class="map-detail-content">
+      <h3>MIRAMAR</h3>
+      <span class="map-region-label">🇲🇽 멕시코 사막 지형</span>
+      <p>PUBG 두 번째 맵으로 <strong>광활한 사막</strong>이 특징입니다. 나무가 거의 없어 숨을 공간이 적고, 험준한 지형 때문에 차량 운전이 어렵습니다.</p>
+      <p><strong>El Pozo, Pecado</strong>가 대표적인 핫드롭 지역이며, 높은 고지를 활용한 저격 전략이 유효합니다. 긴 교전 거리를 고려한 무기 선택이 중요합니다.</p>
+      <div class="map-specs">
+        <div class="spec"><div class="spec-label">맵 크기</div><div class="spec-val">8 × 8 km</div></div>
+        <div class="spec"><div class="spec-label">최대 인원</div><div class="spec-val">100명</div></div>
+        <div class="spec"><div class="spec-label">지형</div><div class="spec-val">사막 + 황무지</div></div>
+        <div class="spec"><div class="spec-label">특징</div><div class="spec-val">저격 유리</div></div>
+      </div>
+      <div class="tags-wrap">
+        <span class="tag-pill danger">🔥 El Pozo</span>
+        <span class="tag-pill danger">🔥 Pecado</span>
+        <span class="tag-pill danger">🔥 Los Leones</span>
+        <span class="tag-pill safe">✓ Impala</span>
+        <span class="tag-pill special">🔭 장거리 저격</span>
+        <span class="tag-pill special">🚗 오프로드 드라이브</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SANHOK -->
+  <div class="map-detail-row">
+    <div class="map-detail-img-wrap" onclick="openLB('https://media.githubusercontent.com/media/pubg/api-assets/master/Assets/Maps/Sanhok_Main_High_Res.png','SANHOK','4×4km · 정글 밀림 · 빠른 교전')">
+      <img src="https://media.githubusercontent.com/media/pubg/api-assets/master/Assets/Maps/Sanhok_Main_High_Res.png" alt="Sanhok"https://placehold.co/600x600/080a0c/f0c040?text=SANHOK'" loading="lazy" decoding="async">
+      <span class="map-detail-badge badge-small">● SMALL</span>
+      <div class="map-click-hint">🔍 클릭하면 크게 보입니다</div>
+    </div>
+    <div class="map-detail-content">
+      <h3>SANHOK</h3>
+      <span class="map-region-label">🇹🇭 태국 열대 정글</span>
+      <p>PUBG 최초의 <strong>소형 맵 (4×4km)</strong>으로 빠른 진행이 특징입니다. 정글 지형으로 엄폐물이 풍부하고, 강이 맵을 3개 구역으로 나눕니다.</p>
+      <p><strong>Bootcamp, Paradise Resort</strong>가 최고 핫드롭 지역이며, 긴밀한 근거리 교전이 많아 AR, SMG가 유리합니다. 블루존도 빠르게 줄어듭니다.</p>
+      <div class="map-specs">
+        <div class="spec"><div class="spec-label">맵 크기</div><div class="spec-val">4 × 4 km</div></div>
+        <div class="spec"><div class="spec-label">최대 인원</div><div class="spec-val">100명</div></div>
+        <div class="spec"><div class="spec-label">지형</div><div class="spec-val">정글 + 강</div></div>
+        <div class="spec"><div class="spec-label">템포</div><div class="spec-val">초고속</div></div>
+      </div>
+      <div class="tags-wrap">
+        <span class="tag-pill danger">🔥 Bootcamp</span>
+        <span class="tag-pill danger">🔥 Paradise Resort</span>
+        <span class="tag-pill danger">🔥 Quarry</span>
+        <span class="tag-pill safe">✓ Ruins</span>
+        <span class="tag-pill special">🌿 정글 은폐</span>
+        <span class="tag-pill special">⚡ 빠른 블루존</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIKENDI -->
+  <div class="map-detail-row rev">
+    <div class="map-detail-img-wrap" onclick="openLB('https://media.githubusercontent.com/media/pubg/api-assets/master/Assets/Maps/Vikendi_Main_High_Res.png','VIKENDI','6×6km · 설원 · 발자국 추적')">
+      <img src="https://media.githubusercontent.com/media/pubg/api-assets/master/Assets/Maps/Vikendi_Main_High_Res.png" alt="Vikendi"https://placehold.co/600x600/080a0c/f0c040?text=VIKENDI'" loading="lazy" decoding="async">
+      <span class="map-detail-badge badge-small">◎ ROTATION</span>
+      <div class="map-click-hint">🔍 클릭하면 크게 보입니다</div>
+    </div>
+    <div class="map-detail-content">
+      <h3>VIKENDI</h3>
+      <span class="map-region-label">❄️ 동유럽 설원 지형</span>
+      <p>눈으로 덮인 <strong>6×6km 설원 맵</strong>입니다. 눈 위에 발자국이 남아 적의 동선 추적이 가능한 독특한 시스템이 있습니다. 빙판 위를 달리는 스노모빌이 특징입니다.</p>
+      <p><strong>Podvosto, Cosmodrome</strong>이 인기 핫드롭이며, 흰 설원에서의 이동 시 발자국 노출에 주의해야 합니다.</p>
+      <div class="map-specs">
+        <div class="spec"><div class="spec-label">맵 크기</div><div class="spec-val">6 × 6 km</div></div>
+        <div class="spec"><div class="spec-label">최대 인원</div><div class="spec-val">100명</div></div>
+        <div class="spec"><div class="spec-label">지형</div><div class="spec-val">설원 + 빙판</div></div>
+        <div class="spec"><div class="spec-label">특수</div><div class="spec-val">발자국 시스템</div></div>
+      </div>
+      <div class="tags-wrap">
+        <span class="tag-pill danger">🔥 Podvosto</span>
+        <span class="tag-pill danger">🔥 Cosmodrome</span>
+        <span class="tag-pill safe">✓ Volnova</span>
+        <span class="tag-pill special">👣 발자국 추적</span>
+        <span class="tag-pill special">🛷 스노모빌</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAEGO -->
+  <div class="map-detail-row">
+    <div class="map-detail-img-wrap" onclick="openLB('https://media.githubusercontent.com/media/pubg/api-assets/master/Assets/Maps/Taego_Main_High_Res.png','TAEGO','8×8km · 한국 · 자기소생 시스템')">
+      <img src="https://media.githubusercontent.com/media/pubg/api-assets/master/Assets/Maps/Taego_Main_High_Res.png" alt="Taego"https://placehold.co/600x600/080a0c/f0c040?text=TAEGO'" loading="lazy" decoding="async">
+      <span class="map-detail-badge badge-ranked">🏆 RANKED</span>
+      <div class="map-click-hint">🔍 클릭하면 크게 보입니다</div>
+    </div>
+    <div class="map-detail-content">
+      <h3>TAEGO</h3>
+      <span class="map-region-label">🇰🇷 한국 지형 — 태이고</span>
+      <p>한국을 배경으로 한 <strong>8×8km 맵</strong>입니다. 가장 큰 특징은 <strong>자기소생(Self AED)</strong> 아이템으로, 혼자서 다운 상태에서 일어날 수 있습니다.</p>
+      <p>논밭, 한옥 마을, 도시 지역이 혼재하며 다양한 전투 스타일을 지원합니다. 콜 투 암스(Call to Arms) 특수 이벤트도 존재합니다.</p>
+      <div class="map-specs">
+        <div class="spec"><div class="spec-label">맵 크기</div><div class="spec-val">8 × 8 km</div></div>
+        <div class="spec"><div class="spec-label">최대 인원</div><div class="spec-val">100명</div></div>
+        <div class="spec"><div class="spec-label">지형</div><div class="spec-val">논밭 + 도시</div></div>
+        <div class="spec"><div class="spec-label">특수</div><div class="spec-val">자기소생</div></div>
+      </div>
+      <div class="tags-wrap">
+        <span class="tag-pill danger">🔥 Taego City</span>
+        <span class="tag-pill danger">🔥 Hwasun</span>
+        <span class="tag-pill safe">✓ Muju Resort</span>
+        <span class="tag-pill special">💉 자기소생</span>
+        <span class="tag-pill special">📯 Call to Arms</span>
+        <span class="tag-pill special">🏆 랭크 맵</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- DESTON -->
+  <div class="map-detail-row rev">
+    <div class="map-detail-img-wrap" onclick="openLB('https://media.githubusercontent.com/media/pubg/api-assets/master/Assets/Maps/Deston_Main_High_Res.png','DESTON','8×8km · 미래 도시 · 수직 전투')">
+      <img src="https://media.githubusercontent.com/media/pubg/api-assets/master/Assets/Maps/Deston_Main_High_Res.png" alt="Deston"https://placehold.co/600x600/080a0c/f0c040?text=DESTON'" loading="lazy" decoding="async">
+      <span class="map-detail-badge badge-active">● ACTIVE</span>
+      <div class="map-click-hint">🔍 클릭하면 크게 보입니다</div>
+    </div>
+    <div class="map-detail-content">
+      <h3>DESTON</h3>
+      <span class="map-region-label">🏙️ 미래 도시 — 미국</span>
+      <p>미래적인 <strong>초고층 도시</strong>가 특징인 8×8km 맵입니다. 건물 내부 전투와 수직적 이동이 중요한 요소로, Ascender(등반 장비)를 활용한 전략이 핵심입니다.</p>
+      <p>거대한 수력발전댐과 같은 독특한 POI들이 있으며, 수중 지형도 풍부합니다.</p>
+      <div class="map-specs">
+        <div class="spec"><div class="spec-label">맵 크기</div><div class="spec-val">8 × 8 km</div></div>
+        <div class="spec"><div class="spec-label">최대 인원</div><div class="spec-val">100명</div></div>
+        <div class="spec"><div class="spec-label">지형</div><div class="spec-val">도시 + 수중</div></div>
+        <div class="spec"><div class="spec-label">특수</div><div class="spec-val">Ascender</div></div>
+      </div>
+      <div class="tags-wrap">
+        <span class="tag-pill danger">🔥 Ristad</span>
+        <span class="tag-pill danger">🔥 Sanshin</span>
+        <span class="tag-pill special">🏗️ 고층 빌딩</span>
+        <span class="tag-pill special">🧗 Ascender</span>
+        <span class="tag-pill special">🌊 수중 전투</span>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══════════ SECTION 4: WEAPONS ═══════════ -->
+<section id="weapons" class="section-wrap">
+  <div class="section-head">
+    <span class="section-num">04</span>
+    <h2 class="section-title">무기 (Weapons)</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="filter-bar" id="wepFilterBar">
+    <button class="ftab active" onclick="filterItems('weapons-grid','wtype','all',this,'wepFilterBar')">전체</button>
+    <button class="ftab" onclick="filterItems('weapons-grid','wtype','ar',this,'wepFilterBar')">돌격소총 AR</button>
+    <button class="ftab" onclick="filterItems('weapons-grid','wtype','sr',this,'wepFilterBar')">저격소총 SR</button>
+    <button class="ftab" onclick="filterItems('weapons-grid','wtype','dmr',this,'wepFilterBar')">지정사수 DMR</button>
+    <button class="ftab" onclick="filterItems('weapons-grid','wtype','smg',this,'wepFilterBar')">기관단총 SMG</button>
+    <button class="ftab" onclick="filterItems('weapons-grid','wtype','sg',this,'wepFilterBar')">샷건 SG</button>
+    <button class="ftab" onclick="filterItems('weapons-grid','wtype','lmg',this,'wepFilterBar')">경기관총 LMG</button>
+    <button class="ftab" onclick="filterItems('weapons-grid','wtype','pistol',this,'wepFilterBar')">권총</button>
+    <button class="ftab" onclick="filterItems('weapons-grid','wtype','melee',this,'wepFilterBar')">근접</button>
+  </div>
+
+  <div class="items-grid" id="weapons-grid">
+
+    <!-- AR -->
+    <div class="item-card" data-wtype="ar" onclick="addToLBGroup(this,'https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_AK47_C.png','AKM','돌격소총 | 7.62mm')">
+      <div class="item-img-wrap"><img class="item-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_AK47_C.png" alt="AKM"https://placehold.co/180x90/080a0c/f0c040?text=AKM'" loading="lazy" decoding="async"></div>
+      <div class="item-name">AKM</div>
+      <div class="item-sub">AR | 7.62mm | 강한 반동</div>
+    </div>
+    <div class="item-card" data-wtype="ar" onclick="addToLBGroup(this,'https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_HK416_C.png','M416','돌격소총 | 5.56mm | 범용')">
+      <div class="item-img-wrap"><img class="item-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_HK416_C.png" alt="M416"https://placehold.co/180x90/080a0c/f0c040?text=M416'" loading="lazy" decoding="async"></div>
+      <div class="item-name">M416</div>
+      <div class="item-sub">AR | 5.56mm | 5슬롯 부착</div>
+    </div>
+    <div class="item-card" data-wtype="ar" onclick="addToLBGroup(this,'https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_SCAR-L_C.png','SCAR-L','돌격소총 | 5.56mm | 낮은 반동')">
+      <div class="item-img-wrap"><img class="item-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_SCAR-L_C.png" alt="SCAR-L"https://placehold.co/180x90/080a0c/f0c040?text=SCAR-L'" loading="lazy" decoding="async"></div>
+      <div class="item-name">SCAR-L</div>
+      <div class="item-sub">AR | 5.56mm | 안정적 반동</div>
+    </div>
+    <div class="item-card" data-wtype="ar" onclick="addToLBGroup(this,'https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_M16A4_C.png','M16A4','돌격소총 | 5.56mm | 점사 모드')">
+      <div class="item-img-wrap"><img class="item-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_M16A4_C.png" alt="M16A4"https://placehold.co/180x90/080a0c/f0c040?text=M16A4'" loading="lazy" decoding="async"></div>
+      <div class="item-name">M16A4</div>
+      <div class="item-sub">AR | 5.56mm | 점사 특화</div>
+    </div>
+    <div class="item-card" data-wtype="ar" onclick="addToLBGroup(this,'https://github.com/pubg/api-assets/blob/master/Assets/Item/Weapon/Main/Item_Weapon_BerylM762_C.png?raw=true','BERYL M762','돌격소총 | 7.62mm | 고급 AR')">
+      <div class="item-img-wrap"><img class="item-img" src="https://github.com/pubg/api-assets/blob/master/Assets/Item/Weapon/Main/Item_Weapon_BerylM762_C.png?raw=true" alt="Beryl"https://placehold.co/180x90/080a0c/f0c040?text=BERYL'" loading="lazy" decoding="async"></div>
+      <div class="item-name">BERYL M762</div>
+      <div class="item-sub">AR | 7.62mm | 높은 화력</div>
+    </div>
+    <div class="item-card" data-wtype="ar" onclick="addToLBGroup(this,'https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_QBZ_C.png','QBZ95-SR','돌격소총 | 5.56mm | Sanhok 전용')">
+      <div class="item-img-wrap"><img class="item-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_QBZ_C.png" alt="QBZ"https://placehold.co/180x90/080a0c/f0c040?text=QBZ'" loading="lazy" decoding="async"></div>
+      <div class="item-name">QBZ95-SR</div>
+      <div class="item-sub">AR | 5.56mm | 산호크 전용</div>
+    </div>
+    <div class="item-card" data-wtype="ar" onclick="addToLBGroup(this,'https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_Groza_C.png','GROZA','돌격소총 | 7.62mm | 에어드롭')">
+      <div class="item-img-wrap"><img class="item-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_Groza_C.png" alt="Groza"https://placehold.co/180x90/080a0c/f0c040?text=GROZA'" loading="lazy" decoding="async"></div>
+      <div class="item-name">GROZA</div>
+      <div class="item-sub">AR | 7.62mm | 에어드롭 전용</div>
+      <span class="item-badge badge-airdrop">에어드롭</span>
+    </div>
+    <div class="item-card" data-wtype="ar" onclick="addToLBGroup(this,'https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_AUG_C.png','AUG A3','돌격소총 | 5.56mm | 에어드롭')">
+      <div class="item-img-wrap"><img class="item-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_AUG_C.png" alt="AUG"https://placehold.co/180x90/080a0c/f0c040?text=AUG'" loading="lazy" decoding="async"></div>
+      <div class="item-name">AUG A3</div>
+      <div class="item-sub">AR | 5.56mm | 에어드롭</div>
+      <span class="item-badge badge-airdrop">에어드롭</span>
+    </div>
+    <div class="item-card" data-wtype="ar" onclick="addToLBGroup(this,'https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_G36C_C.png','G36C','돌격소총 | 5.56mm | Vikendi')">
+      <div class="item-img-wrap"><img class="item-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_G36C_C.png" alt="G36C"https://placehold.co/180x90/080a0c/f0c040?text=G36C'" loading="lazy" decoding="async"></div>
+      <div class="item-name">G36C</div>
+      <div class="item-sub">AR | 5.56mm | 비켄디 전용</div>
+    </div>
+    <div class="item-card" data-wtype="ar" onclick="addToLBGroup(this,'https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_ACE32_C.png','ACE32','돌격소총 | 7.62mm')">
+      <div class="item-img-wrap"><img class="item-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_ACE32_C.png" alt="ACE32"https://placehold.co/180x90/080a0c/f0c040?text=ACE32'" loading="lazy" decoding="async"></div>
+      <div class="item-name">ACE32</div>
+      <div class="item-sub">AR | 7.62mm</div>
+    </div>
+
+    <!-- SR -->
+    <div class="item-card" data-wtype="sr" onclick="addToLBGroup(this,'https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_Kar98k_C.png','KAR98K','볼트액션 | 7.62mm | 명품 저격')">
+      <div class="item-img-wrap"><img class="item-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_Kar98k_C.png" alt="Kar98k"https://placehold.co/180x90/080a0c/f0c040?text=KAR98K'" loading="lazy" decoding="async"></div>
+      <div class="item-name">KAR98K</div>
+      <div class="item-sub">SR | 7.62mm | 볼트액션</div>
+    </div>
+    <div class="item-card" data-wtype="sr" onclick="addToLBGroup(this,'https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_AWM_C.png','AWM','볼트액션 | .300 Mag | 에어드롭')">
+      <div class="item-img-wrap"><img class="item-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_AWM_C.png" alt="AWM"https://placehold.co/180x90/080a0c/f0c040?text=AWM'" loading="lazy" decoding="async"></div>
+      <div class="item-name">AWM</div>
+      <div class="item-sub">SR | .300 Mag | 에어드롭</div>
+      <span class="item-badge badge-airdrop">에어드롭</span>
+    </div>
+    <div class="item-card" data-wtype="sr" onclick="addToLBGroup(this,'https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_M24_C.png','M24','볼트액션 | 7.62mm')">
+      <div class="item-img-wrap"><img class="item-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_M24_C.png" alt="M24"https://placehold.co/180x90/080a0c/f0c040?text=M24'" loading="lazy" decoding="async"></div>
+      <div class="item-name">M24</div>
+      <div class="item-sub">SR | 7.62mm | 볼트액션</div>
+    </div>
+    <div class="item-card" data-wtype="sr" onclick="addToLBGroup(this,'https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_Win94_C.png','WIN94','볼트액션 | .45 ACP | Miramar')">
+      <div class="item-img-wrap"><img class="item-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_Win94_C.png" alt="Win94"https://placehold.co/180x90/080a0c/f0c040?text=WIN94'" loading="lazy" decoding="async"></div>
+      <div class="item-name">WIN94</div>
+      <div class="item-sub">SR | .45 ACP | 미라마 전용</div>
+    </div>
+
+    <!-- DMR -->
+    <div class="item-card" data-wtype="dmr" onclick="addToLBGroup(this,'https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_Mini14_C.png','MINI 14','DMR | 5.56mm | 빠른 연사')">
+      <div class="item-img-wrap"><img class="item-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_Mini14_C.png" alt="Mini14"https://placehold.co/180x90/080a0c/f0c040?text=MINI14'" loading="lazy" decoding="async"></div>
+      <div class="item-name">MINI 14</div>
+      <div class="item-sub">DMR | 5.56mm | 빠른 연사</div>
+    </div>
+    <div class="item-card" data-wtype="dmr" onclick="addToLBGroup(this,'https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_SKS_C.png','SKS','DMR | 7.62mm | 반자동')">
+      <div class="item-img-wrap"><img class="item-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_SKS_C.png" alt="SKS"https://placehold.co/180x90/080a0c/f0c040?text=SKS'" loading="lazy" decoding="async"></div>
+      <div class="item-name">SKS</div>
+      <div class="item-sub">DMR | 7.62mm | 반자동</div>
+    </div>
+    <div class="item-card" data-wtype="dmr" onclick="addToLBGroup(this,'https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_MK14_C.png','MK14 EBR','DMR | 7.62mm | 에어드롭')">
+      <div class="item-img-wrap"><img class="item-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_MK14_C.png" alt="MK14"https://placehold.co/180x90/080a0c/f0c040?text=MK14'" loading="lazy" decoding="async"></div>
+      <div class="item-name">MK14 EBR</div>
+      <div class="item-sub">DMR | 7.62mm | 에어드롭</div>
+      <span class="item-badge badge-airdrop">에어드롭</span>
+    </div>
+    <div class="item-card" data-wtype="dmr" onclick="addToLBGroup(this,'https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_VSS_C.png','VSS','DMR | 9mm | 소음기 내장')">
+      <div class="item-img-wrap"><img class="item-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_VSS_C.png" alt="VSS"https://placehold.co/180x90/080a0c/f0c040?text=VSS'" loading="lazy" decoding="async"></div>
+      <div class="item-name">VSS</div>
+      <div class="item-sub">DMR | 9mm | 소음기 내장</div>
+    </div>
+    <div class="item-card" data-wtype="dmr" onclick="addToLBGroup(this,'https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_QBU_C.png','QBU88','DMR | 5.56mm | Sanhok')">
+      <div class="item-img-wrap"><img class="item-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_QBU_C.png" alt="QBU"https://placehold.co/180x90/080a0c/f0c040?text=QBU88'" loading="lazy" decoding="async"></div>
+      <div class="item-name">QBU88</div>
+      <div class="item-sub">DMR | 5.56mm | 산호크 전용</div>
+    </div>
+
+    <!-- SMG -->
+    <div class="item-card" data-wtype="smg" onclick="addToLBGroup(this,'https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_UMP_C.png','UMP45','SMG | .45 ACP | 범용')">
+      <div class="item-img-wrap"><img class="item-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_UMP_C.png" alt="UMP45"https://placehold.co/180x90/080a0c/f0c040?text=UMP45'" loading="lazy" decoding="async"></div>
+      <div class="item-name">UMP45</div>
+      <div class="item-sub">SMG | .45 ACP | 안정적</div>
+    </div>
+    <div class="item-card" data-wtype="smg" onclick="addToLBGroup(this,'https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_Vector_C.png','VECTOR','SMG | .45 ACP | 초고속 연사')">
+      <div class="item-img-wrap"><img class="item-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_Vector_C.png" alt="Vector"https://placehold.co/180x90/080a0c/f0c040?text=VECTOR'" loading="lazy" decoding="async"></div>
+      <div class="item-name">VECTOR</div>
+      <div class="item-sub">SMG | .45 ACP | 초고속 연사</div>
+    </div>
+    <div class="item-card" data-wtype="smg" onclick="addToLBGroup(this,'https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_Tommy_C.png','TOMMY GUN','SMG | .45 ACP | 드럼매거진')">
+      <div class="item-img-wrap"><img class="item-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_Tommy_C.png" alt="Tommy"https://placehold.co/180x90/080a0c/f0c040?text=TOMMY'" loading="lazy" decoding="async"></div>
+      <div class="item-name">TOMMY GUN</div>
+      <div class="item-sub">SMG | .45 ACP | 드럼 매거진</div>
+    </div>
+    <div class="item-card" data-wtype="smg" onclick="addToLBGroup(this,'https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_MP5K_C.png','MP5K','SMG | 9mm | Vikendi')">
+      <div class="item-img-wrap"><img class="item-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_MP5K_C.png" alt="MP5K"https://placehold.co/180x90/080a0c/f0c040?text=MP5K'" loading="lazy" decoding="async"></div>
+      <div class="item-name">MP5K</div>
+      <div class="item-sub">SMG | 9mm | 비켄디 전용</div>
+    </div>
+    <div class="item-card" data-wtype="smg" onclick="addToLBGroup(this,'https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_PP-19_Bizon_C.png','BIZON','SMG | 9mm | 53발 내장')">
+      <div class="item-img-wrap"><img class="item-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_PP-19_Bizon_C.png" alt="Bizon"https://placehold.co/180x90/080a0c/f0c040?text=BIZON'" loading="lazy" decoding="async"></div>
+      <div class="item-name">PP-19 BIZON</div>
+      <div class="item-sub">SMG | 9mm | 53발 내장</div>
+    </div>
+    <div class="item-card" data-wtype="smg" onclick="addToLBGroup(this,'https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_Micro_UZI_C.png','MICRO UZI','SMG | 9mm | 초소형')">
+      <div class="item-img-wrap"><img class="item-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_Micro_UZI_C.png" alt="MicroUZI"https://placehold.co/180x90/080a0c/f0c040?text=MICRO+UZI'" loading="lazy" decoding="async"></div>
+      <div class="item-name">MICRO UZI</div>
+      <div class="item-sub">SMG | 9mm | 초소형</div>
+    </div>
+
+    <!-- SG -->
+    <div class="item-card" data-wtype="sg" onclick="addToLBGroup(this,'https://github.com/pubg/api-assets/blob/master/Assets/Item/Weapon/Main/Item_Weapon_Berreta686_C.png?raw=true','S686','SG | 12구경 | 더블배럴')">
+      <div class="item-img-wrap"><img class="item-img" src="https://github.com/pubg/api-assets/blob/master/Assets/Item/Weapon/Main/Item_Weapon_Berreta686_C.png?raw=true" alt="S686"https://placehold.co/180x90/080a0c/f0c040?text=S686'" loading="lazy" decoding="async"></div>
+      <div class="item-name">S686</div>
+      <div class="item-sub">SG | 12구경 | 더블배럴</div>
+    </div>
+    <div class="item-card" data-wtype="sg" onclick="addToLBGroup(this,'https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_S12K_C.png','S12K','SG | 12구경 | 반자동')">
+      <div class="item-img-wrap"><img class="item-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_S12K_C.png" alt="S12K"https://placehold.co/180x90/080a0c/f0c040?text=S12K'" loading="lazy" decoding="async"></div>
+      <div class="item-name">S12K</div>
+      <div class="item-sub">SG | 12구경 | 반자동</div>
+    </div>
+    <div class="item-card" data-wtype="sg" onclick="addToLBGroup(this,'https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_S1897_C.png','S1897','SG | 12구경 | 펌프액션')">
+      <div class="item-img-wrap"><img class="item-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_S1897_C.png" alt="S1897"https://placehold.co/180x90/080a0c/f0c040?text=S1897'" loading="lazy" decoding="async"></div>
+      <div class="item-name">S1897</div>
+      <div class="item-sub">SG | 12구경 | 펌프액션</div>
+    </div>
+    <div class="item-card" data-wtype="sg" onclick="addToLBGroup(this,'https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_DBS_C.png','DBS','SG | 12구경 | 에어드롭')">
+      <div class="item-img-wrap"><img class="item-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_DBS_C.png" alt="DBS"https://placehold.co/180x90/080a0c/f0c040?text=DBS'" loading="lazy" decoding="async"></div>
+      <div class="item-name">DBS</div>
+      <div class="item-sub">SG | 12구경 | 에어드롭</div>
+      <span class="item-badge badge-airdrop">에어드롭</span>
+    </div>
+
+    <!-- LMG -->
+    <div class="item-card" data-wtype="lmg" onclick="addToLBGroup(this,'https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_DP28_C.png','DP-28','LMG | 7.62mm | 47발 팬매거진')">
+      <div class="item-img-wrap"><img class="item-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_DP28_C.png" alt="DP-28"https://placehold.co/180x90/080a0c/f0c040?text=DP-28'" loading="lazy" decoding="async"></div>
+      <div class="item-name">DP-28</div>
+      <div class="item-sub">LMG | 7.62mm | 47발 팬 매거진</div>
+    </div>
+    <div class="item-card" data-wtype="lmg" onclick="addToLBGroup(this,'https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_M249_C.png','M249','LMG | 5.56mm | 에어드롭')">
+      <div class="item-img-wrap"><img class="item-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_M249_C.png" alt="M249"https://placehold.co/180x90/080a0c/f0c040?text=M249'" loading="lazy" decoding="async"></div>
+      <div class="item-name">M249</div>
+      <div class="item-sub">LMG | 5.56mm | 에어드롭</div>
+      <span class="item-badge badge-airdrop">에어드롭</span>
+    </div>
+    <div class="item-card" data-wtype="lmg" onclick="addToLBGroup(this,'https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_MG3_C.png','MG3','LMG | 7.62mm | 에어드롭')">
+      <div class="item-img-wrap"><img class="item-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_MG3_C.png" alt="MG3"https://placehold.co/180x90/080a0c/f0c040?text=MG3'" loading="lazy" decoding="async"></div>
+      <div class="item-name">MG3</div>
+      <div class="item-sub">LMG | 7.62mm | 에어드롭</div>
+      <span class="item-badge badge-airdrop">에어드롭</span>
+    </div>
+
+    <!-- PISTOL -->
+    <div class="item-card" data-wtype="pistol" onclick="addToLBGroup(this,'https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_P92_C.png','P92','권총 | 9mm')">
+      <div class="item-img-wrap"><img class="item-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_P92_C.png" alt="P92"https://placehold.co/180x90/080a0c/f0c040?text=P92'" loading="lazy" decoding="async"></div>
+      <div class="item-name">P92</div>
+      <div class="item-sub">권총 | 9mm | 기본 권총</div>
+    </div>
+    <div class="item-card" data-wtype="pistol" onclick="addToLBGroup(this,'https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_Desert_Eagle_C.png','DEAGLE','권총 | .45 ACP | 강력')">
+      <div class="item-img-wrap"><img class="item-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_Desert_Eagle_C.png" alt="Deagle"https://placehold.co/180x90/080a0c/f0c040?text=DEAGLE'" loading="lazy" decoding="async"></div>
+      <div class="item-name">DEAGLE</div>
+      <div class="item-sub">권총 | .45 ACP | 강력</div>
+    </div>
+    <div class="item-card" data-wtype="pistol" onclick="addToLBGroup(this,'https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_R45_C.png','R45','권총 | .45 ACP | 리볼버')">
+      <div class="item-img-wrap"><img class="item-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_R45_C.png" alt="R45"https://placehold.co/180x90/080a0c/f0c040?text=R45'" loading="lazy" decoding="async"></div>
+      <div class="item-name">R45</div>
+      <div class="item-sub">권총 | .45 ACP | 리볼버</div>
+    </div>
+    <div class="item-card" data-wtype="pistol" onclick="addToLBGroup(this,'https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_R1895_C.png','R1895','권총 | 7.62mm | 리볼버 클래식')">
+      <div class="item-img-wrap"><img class="item-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_R1895_C.png" alt="R1895"https://placehold.co/180x90/080a0c/f0c040?text=R1895'" loading="lazy" decoding="async"></div>
+      <div class="item-name">R1895</div>
+      <div class="item-sub">권총 | 7.62mm | 클래식 리볼버</div>
+    </div>
+    <div class="item-card" data-wtype="pistol" onclick="addToLBGroup(this,'https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_Sawnoff_C.png','SAWED-OFF','권총 | 12구경 | 더블배럴')">
+      <div class="item-img-wrap"><img class="item-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_Sawnoff_C.png" alt="SawnOff"https://placehold.co/180x90/080a0c/f0c040?text=SAWED-OFF'" loading="lazy" decoding="async"></div>
+      <div class="item-name">SAWED-OFF</div>
+      <div class="item-sub">권총 | 12구경 | 더블배럴</div>
+    </div>
+    <div class="item-card" data-wtype="pistol" onclick="addToLBGroup(this,'https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_Skorpion_C.png','SKORPION','권총 | 9mm | 자동')">
+      <div class="item-img-wrap"><img class="item-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Main/Item_Weapon_Skorpion_C.png" alt="Skorpion"https://placehold.co/180x90/080a0c/f0c040?text=SKORPION'" loading="lazy" decoding="async"></div>
+      <div class="item-name">SKORPION</div>
+      <div class="item-sub">권총 | 9mm | 자동사격</div>
+    </div>
+
+    <!-- MELEE -->
+    <div class="item-card" data-wtype="melee" onclick="addToLBGroup(this,'https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Melee/Item_Weapon_Pan_C.png','PAN','근접 | 방어력 보너스 | 전설')">
+      <div class="item-img-wrap"><img class="item-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Melee/Item_Weapon_Pan_C.png" alt="Pan"https://placehold.co/180x90/080a0c/f0c040?text=PAN'" loading="lazy" decoding="async"></div>
+      <div class="item-name">PAN</div>
+      <div class="item-sub">근접 | 엉덩이 방어 🍳</div>
+    </div>
+    <div class="item-card" data-wtype="melee" onclick="addToLBGroup(this,'https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Melee/Item_Weapon_Crowbar_C.png','CROWBAR','근접 무기 | 쇠지레')">
+      <div class="item-img-wrap"><img class="item-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Melee/Item_Weapon_Crowbar_C.png" alt="Crowbar"https://placehold.co/180x90/080a0c/f0c040?text=CROWBAR'" loading="lazy" decoding="async"></div>
+      <div class="item-name">CROWBAR</div>
+      <div class="item-sub">근접 | 쇠지레</div>
+    </div>
+    <div class="item-card" data-wtype="melee" onclick="addToLBGroup(this,'https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Melee/Item_Weapon_Machete_C.png','MACHETE','근접 무기 | 마체테')">
+      <div class="item-img-wrap"><img class="item-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Weapon/Melee/Item_Weapon_Machete_C.png" alt="Machete"https://placehold.co/180x90/080a0c/f0c040?text=MACHETE'" loading="lazy" decoding="async"></div>
+      <div class="item-name">MACHETE</div>
+      <div class="item-sub">근접 | 마체테</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════ SECTION 5: ATTACHMENTS ═══════════ -->
+<section id="attachments" class="section-wrap">
+  <div class="section-head">
+    <span class="section-num">05</span>
+    <h2 class="section-title">부착물 (Attachments)</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="filter-bar" id="attFilterBar">
+    <button class="ftab active" onclick="filterItems('attachments-grid','atype','all',this,'attFilterBar')">전체</button>
+    <button class="ftab" onclick="filterItems('attachments-grid','atype','scope',this,'attFilterBar')">조준경</button>
+    <button class="ftab" onclick="filterItems('attachments-grid','atype','muzzle',this,'attFilterBar')">총구</button>
+    <button class="ftab" onclick="filterItems('attachments-grid','atype','grip',this,'attFilterBar')">손잡이/그립</button>
+    <button class="ftab" onclick="filterItems('attachments-grid','atype','mag',this,'attFilterBar')">탄창</button>
+    <button class="ftab" onclick="filterItems('attachments-grid','atype','stock',this,'attFilterBar')">개머리판</button>
+  </div>
+
+  <div class="attach-grid" id="attachments-grid">
+
+    <!-- SCOPES -->
+    <div class="attach-card" data-atype="scope" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Scope_RedDot_C.png','레드닷 사이트','조준경 | 1x | 모든 무기')">
+      <div class="attach-img-wrap"><img src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Scope_RedDot_C.png" alt="RedDot"https://placehold.co/100x60/080a0c/f0c040?text=RDS'" loading="lazy" decoding="async"></div>
+      <div class="attach-text"><div class="attach-name">레드닷 사이트</div><div class="attach-sub">조준경 | 1× | 근거리 적합</div></div>
+    </div>
+    <div class="attach-card" data-atype="scope" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Scope_Holographic_C.png','홀로그래픽 사이트','조준경 | 1x | 와이드뷰')">
+      <div class="attach-img-wrap"><img src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Scope_Holographic_C.png" alt="Holo"https://placehold.co/100x60/080a0c/f0c040?text=HOLO'" loading="lazy" decoding="async"></div>
+      <div class="attach-text"><div class="attach-name">홀로그래픽</div><div class="attach-sub">조준경 | 1× | 와이드뷰</div></div>
+    </div>
+    <div class="attach-card" data-atype="scope" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Scope_2x_C.png','2배율 스코프','조준경 | 2x')">
+      <div class="attach-img-wrap"><img src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Scope_2x_C.png" alt="2x"https://placehold.co/100x60/080a0c/f0c040?text=2x'" loading="lazy" decoding="async"></div>
+      <div class="attach-text"><div class="attach-name">2× 스코프</div><div class="attach-sub">조준경 | 2× | 중거리</div></div>
+    </div>
+    <div class="attach-card" data-atype="scope" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Scope_4x_C.png','4배율 스코프','조준경 | 4x')">
+      <div class="attach-img-wrap"><img src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Scope_4x_C.png" alt="4x"https://placehold.co/100x60/080a0c/f0c040?text=4x'" loading="lazy" decoding="async"></div>
+      <div class="attach-text"><div class="attach-name">4× 스코프</div><div class="attach-sub">조준경 | 4× | 중장거리</div></div>
+    </div>
+    <div class="attach-card" data-atype="scope" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Scope_6x_C.png','6배율 스코프','조준경 | 6x')">
+      <div class="attach-img-wrap"><img src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Scope_6x_C.png" alt="6x"https://placehold.co/100x60/080a0c/f0c040?text=6x'" loading="lazy" decoding="async"></div>
+      <div class="attach-text"><div class="attach-name">6× 스코프</div><div class="attach-sub">조준경 | 6× | 장거리</div></div>
+    </div>
+    <div class="attach-card" data-atype="scope" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Scope_8x_C.png','8배율 스코프','조준경 | 8x | 저격 전용')">
+      <div class="attach-img-wrap"><img src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Scope_8x_C.png" alt="8x"https://placehold.co/100x60/080a0c/f0c040?text=8x'" loading="lazy" decoding="async"></div>
+      <div class="attach-text"><div class="attach-name">8× 스코프</div><div class="attach-sub">조준경 | 8× | 저격 특화</div></div>
+    </div>
+    <div class="attach-card" data-atype="scope" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Scope_15x_C.png','15배율 스코프','조준경 | 15x | 에어드롭 전용')">
+      <div class="attach-img-wrap"><img src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Scope_15x_C.png" alt="15x"https://placehold.co/100x60/080a0c/f0c040?text=15x'" loading="lazy" decoding="async"></div>
+      <div class="attach-text"><div class="attach-name">15× 스코프</div><div class="attach-sub">조준경 | 15× | 에어드롭</div></div>
+    </div>
+    <div class="attach-card" data-atype="scope" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Scope_3x_C.png','3배율 스코프','조준경 | 3x')">
+      <div class="attach-img-wrap"><img src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Scope_3x_C.png" alt="3x"https://placehold.co/100x60/080a0c/f0c040?text=3x'" loading="lazy" decoding="async"></div>
+      <div class="attach-text"><div class="attach-name">3× 스코프</div><div class="attach-sub">조준경 | 3× | 중거리</div></div>
+    </div>
+
+    <!-- MUZZLE -->
+    <div class="attach-card" data-atype="muzzle" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Muzzle_Suppressor_Small_C.png','소음기 (소)','총구 | 소음기 | 권총/SMG')">
+      <div class="attach-img-wrap"><img src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Muzzle_Suppressor_Small_C.png" alt="SuppSmall"https://placehold.co/100x60/080a0c/f0c040?text=SUPP-S'" loading="lazy" decoding="async"></div>
+      <div class="attach-text"><div class="attach-name">소음기 (소)</div><div class="attach-sub">총구 | 권총/SMG용</div></div>
+    </div>
+    <div class="attach-card" data-atype="muzzle" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Muzzle_Suppressor_Medium_C.png','소음기 (중)','총구 | 소음기 | AR/DMR/SMG')">
+      <div class="attach-img-wrap"><img src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Muzzle_Suppressor_Medium_C.png" alt="SuppMed"https://placehold.co/100x60/080a0c/f0c040?text=SUPP-M'" loading="lazy" decoding="async"></div>
+      <div class="attach-text"><div class="attach-name">소음기 (중)</div><div class="attach-sub">총구 | AR/DMR용</div></div>
+    </div>
+    <div class="attach-card" data-atype="muzzle" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Muzzle_Suppressor_Large_C.png','소음기 (대)','총구 | 소음기 | SR 전용')">
+      <div class="attach-img-wrap"><img src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Muzzle_Suppressor_Large_C.png" alt="SuppLarge"https://placehold.co/100x60/080a0c/f0c040?text=SUPP-L'" loading="lazy" decoding="async"></div>
+      <div class="attach-text"><div class="attach-name">소음기 (대)</div><div class="attach-sub">총구 | SR 전용</div></div>
+    </div>
+    <div class="attach-card" data-atype="muzzle" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Muzzle_FlashHider_Medium_C.png','플래시히더','총구 | 화염 제거')">
+      <div class="attach-img-wrap"><img src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Muzzle_FlashHider_Medium_C.png" alt="FlashHider"https://placehold.co/100x60/080a0c/f0c040?text=FLASH'" loading="lazy" decoding="async"></div>
+      <div class="attach-text"><div class="attach-name">플래시히더</div><div class="attach-sub">총구 | 화염 억제</div></div>
+    </div>
+    <div class="attach-card" data-atype="muzzle" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Muzzle_Compensator_Medium_C.png','컴펜세이터','총구 | 반동 감소')">
+      <div class="attach-img-wrap"><img src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Muzzle_Compensator_Medium_C.png" alt="Compensator"https://placehold.co/100x60/080a0c/f0c040?text=COMP'" loading="lazy" decoding="async"></div>
+      <div class="attach-text"><div class="attach-name">컴펜세이터</div><div class="attach-sub">총구 | 반동 감소</div></div>
+    </div>
+    <div class="attach-card" data-atype="muzzle" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Muzzle_Choke_C.png','초크','총구 | SG 전용 | 산탄 집중')">
+      <div class="attach-img-wrap"><img src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Muzzle_Choke_C.png" alt="Choke"https://placehold.co/100x60/080a0c/f0c040?text=CHOKE'" loading="lazy" decoding="async"></div>
+      <div class="attach-text"><div class="attach-name">초크</div><div class="attach-sub">총구 | SG 산탄 집중</div></div>
+    </div>
+
+    <!-- GRIP / LOWER -->
+    <div class="attach-card" data-atype="grip" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Lower_AngledForeGrip_C.png','각진 수직손잡이','하단 | 반동 안정성 향상')">
+      <div class="attach-img-wrap"><img src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Lower_AngledForeGrip_C.png" alt="AngledGrip"https://placehold.co/100x60/080a0c/f0c040?text=ANGLED'" loading="lazy" decoding="async"></div>
+      <div class="attach-text"><div class="attach-name">각진 수직손잡이</div><div class="attach-sub">하단 | 반동 안정성 향상</div></div>
+    </div>
+    <div class="attach-card" data-atype="grip" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Lower_VerticalForeGrip_C.png','수직 손잡이','하단 | 수직 반동 감소')">
+      <div class="attach-img-wrap"><img src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Lower_VerticalForeGrip_C.png" alt="VertGrip"https://placehold.co/100x60/080a0c/f0c040?text=VERT'" loading="lazy" decoding="async"></div>
+      <div class="attach-text"><div class="attach-name">수직 손잡이</div><div class="attach-sub">하단 | 수직 반동 감소</div></div>
+    </div>
+    <div class="attach-card" data-atype="grip" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Lower_HalfGrip_C.png','하프 그립','하단 | 반동 + 안정성 균형')">
+      <div class="attach-img-wrap"><img src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Lower_HalfGrip_C.png" alt="HalfGrip"https://placehold.co/100x60/080a0c/f0c040?text=HALF'" loading="lazy" decoding="async"></div>
+      <div class="attach-text"><div class="attach-name">하프 그립</div><div class="attach-sub">하단 | 반동/안정 균형</div></div>
+    </div>
+    <div class="attach-card" data-atype="grip" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Lower_ThumbGrip_C.png','섬 그립','하단 | 조준 안정성')">
+      <div class="attach-img-wrap"><img src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Lower_ThumbGrip_C.png" alt="ThumbGrip"https://placehold.co/100x60/080a0c/f0c040?text=THUMB'" loading="lazy" decoding="async"></div>
+      <div class="attach-text"><div class="attach-name">섬 그립</div><div class="attach-sub">하단 | 조준 안정성</div></div>
+    </div>
+    <div class="attach-card" data-atype="grip" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Lower_LightGrip_C.png','라이트 그립','하단 | 경량')">
+      <div class="attach-img-wrap"><img src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Lower_LightGrip_C.png" alt="LightGrip"https://placehold.co/100x60/080a0c/f0c040?text=LIGHT'" loading="lazy" decoding="async"></div>
+      <div class="attach-text"><div class="attach-name">라이트 그립</div><div class="attach-sub">하단 | 경량 경반동</div></div>
+    </div>
+
+    <!-- MAGAZINE -->
+    <div class="attach-card" data-atype="mag" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Magazine_Extended_Large_C.png','확장 탄창 (대)','탄창 | AR/LMG용 | 탄수 증가')">
+      <div class="attach-img-wrap"><img src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Magazine_Extended_Large_C.png" alt="ExtMagLarge"https://placehold.co/100x60/080a0c/f0c040?text=EXT-L'" loading="lazy" decoding="async"></div>
+      <div class="attach-text"><div class="attach-name">확장 탄창 (대)</div><div class="attach-sub">탄창 | AR/DMR/LMG</div></div>
+    </div>
+    <div class="attach-card" data-atype="mag" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Magazine_ExtendedQuickDraw_Large_C.png','확장속사 탄창 (대)','탄창 | AR용 | 탄수+재장전 향상')">
+      <div class="attach-img-wrap"><img src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Magazine_ExtendedQuickDraw_Large_C.png" alt="EQDMagL"https://placehold.co/100x60/080a0c/f0c040?text=EQD-L'" loading="lazy" decoding="async"></div>
+      <div class="attach-text"><div class="attach-name">확장속사 탄창 (대)</div><div class="attach-sub">탄창 | 탄수+재장전 향상</div></div>
+    </div>
+    <div class="attach-card" data-atype="mag" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Magazine_QuickDraw_Large_C.png','속사 탄창 (대)','탄창 | AR용 | 재장전 향상')">
+      <div class="attach-img-wrap"><img src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Magazine_QuickDraw_Large_C.png" alt="QDMagL"https://placehold.co/100x60/080a0c/f0c040?text=QD-L'" loading="lazy" decoding="async"></div>
+      <div class="attach-text"><div class="attach-name">속사 탄창 (대)</div><div class="attach-sub">탄창 | 재장전 속도 향상</div></div>
+    </div>
+
+    <!-- STOCK -->
+    <div class="attach-card" data-atype="stock" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Stock_AR_Composite_C.png','개머리판 (AR)','개머리판 | AR용 | 반동 감소')">
+      <div class="attach-img-wrap"><img src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Stock_AR_Composite_C.png" alt="StockAR"https://placehold.co/100x60/080a0c/f0c040?text=STOCK-AR'" loading="lazy" decoding="async"></div>
+      <div class="attach-text"><div class="attach-name">개머리판 (AR)</div><div class="attach-sub">스톡 | AR용 | 반동 감소</div></div>
+    </div>
+    <div class="attach-card" data-atype="stock" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Stock_SniperRifle_CheekPad_C.png','저격소총 개머리판','개머리판 | SR용 | 조준 안정')">
+      <div class="attach-img-wrap"><img src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Attachment/None/Item_Attach_Weapon_Stock_SniperRifle_CheekPad_C.png" alt="StockSR"https://placehold.co/100x60/080a0c/f0c040?text=STOCK-SR'" loading="lazy" decoding="async"></div>
+      <div class="attach-text"><div class="attach-name">저격소총 개머리판</div><div class="attach-sub">스톡 | SR용 | 조준 안정</div></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════ SECTION 6: VEHICLES ═══════════ -->
+<section id="vehicles" class="section-wrap">
+  <div class="section-head">
+    <span class="section-num">06</span>
+    <h2 class="section-title">차량 (Vehicles)</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="filter-bar" id="vehFilterBar">
+    <button class="ftab active" onclick="filterItems('vehicles-grid','vtype','all',this,'vehFilterBar')">전체</button>
+    <button class="ftab" onclick="filterItems('vehicles-grid','vtype','car',this,'vehFilterBar')">자동차</button>
+    <button class="ftab" onclick="filterItems('vehicles-grid','vtype','bike',this,'vehFilterBar')">오토바이</button>
+    <button class="ftab" onclick="filterItems('vehicles-grid','vtype','water',this,'vehFilterBar')">수상</button>
+    <button class="ftab" onclick="filterItems('vehicles-grid','vtype','special',this,'vehFilterBar')">특수</button>
+  </div>
+
+  <div class="vehicles-grid" id="vehicles-grid">
+
+    <!-- CARS -->
+    <div class="vehicle-card" data-vtype="car" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Vehicle/Land/Item_Vehicle_UAZ_01_C.png','UAZ (Closed)','지프 | 4인승 | 험지 주행')">
+      <div class="vehicle-img-area"><img src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Vehicle/Land/Item_Vehicle_UAZ_01_C.png" alt="UAZ"https://placehold.co/200x120/080a0c/f0c040?text=UAZ'" loading="lazy" decoding="async"></div>
+      <div class="vehicle-info"><div class="vehicle-name">UAZ (CLOSED)</div><div class="vehicle-meta">지프 | 4인승 | 험지 주행 강력</div></div>
+    </div>
+    <div class="vehicle-card" data-vtype="car" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Vehicle/Land/Item_Vehicle_UAZ_03_C.png','UAZ (Open)','지프 | 4인승 | 오픈탑')">
+      <div class="vehicle-img-area"><img src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Vehicle/Land/Item_Vehicle_UAZ_03_C.png" alt="UAZ Open"https://placehold.co/200x120/080a0c/f0c040?text=UAZ+OPEN'" loading="lazy" decoding="async"></div>
+      <div class="vehicle-info"><div class="vehicle-name">UAZ (OPEN)</div><div class="vehicle-meta">지프 | 4인승 | 오픈탑</div></div>
+    </div>
+    <div class="vehicle-card" data-vtype="car" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Vehicle/Land/Item_Vehicle_Dacia_01_C.png','DACIA','세단 | 4인승 | 빠른 속도')">
+      <div class="vehicle-img-area"><img src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Vehicle/Land/Item_Vehicle_Dacia_01_C.png" alt="Dacia"https://placehold.co/200x120/080a0c/f0c040?text=DACIA'" loading="lazy" decoding="async"></div>
+      <div class="vehicle-info"><div class="vehicle-name">DACIA</div><div class="vehicle-meta">세단 | 4인승 | 최고 속도 우수</div></div>
+    </div>
+    <div class="vehicle-card" data-vtype="car" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Vehicle/Land/Item_Vehicle_Buggy_01_C.png','BUGGY','버기 | 2인승 | 초고속')">
+      <div class="vehicle-img-area"><img src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Vehicle/Land/Item_Vehicle_Buggy_01_C.png" alt="Buggy"https://placehold.co/200x120/080a0c/f0c040?text=BUGGY'" loading="lazy" decoding="async"></div>
+      <div class="vehicle-info"><div class="vehicle-name">BUGGY</div><div class="vehicle-meta">버기 | 2인승 | 최고 속도</div></div>
+    </div>
+    <div class="vehicle-card" data-vtype="car" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Vehicle/Land/Item_Vehicle_Pickup_01_C.png','PICKUP TRUCK','픽업트럭 | 4인승 | 사막 특화')">
+      <div class="vehicle-img-area"><img src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Vehicle/Land/Item_Vehicle_Pickup_01_C.png" alt="Pickup"https://placehold.co/200x120/080a0c/f0c040?text=PICKUP'" loading="lazy" decoding="async"></div>
+      <div class="vehicle-info"><div class="vehicle-name">PICKUP TRUCK</div><div class="vehicle-meta">픽업 | 4인승 | 사막지형 강력</div></div>
+    </div>
+    <div class="vehicle-card" data-vtype="car" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Vehicle/Land/Item_Vehicle_Rony_01_C.png','RONY','경트럭 | 4인승')">
+      <div class="vehicle-img-area"><img src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Vehicle/Land/Item_Vehicle_Rony_01_C.png" alt="Rony"https://placehold.co/200x120/080a0c/f0c040?text=RONY'" loading="lazy" decoding="async"></div>
+      <div class="vehicle-info"><div class="vehicle-name">RONY</div><div class="vehicle-meta">경트럭 | 4인승 | 산호크 전용</div></div>
+    </div>
+    <div class="vehicle-card" data-vtype="car" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Vehicle/Land/Item_Vehicle_MinibusPink_C.png','VAN','밴 | 4인승 | 이동 엄폐')">
+      <div class="vehicle-img-area"><img src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Vehicle/Land/Item_Vehicle_MinibusPink_C.png" alt="Van"https://placehold.co/200x120/080a0c/f0c040?text=VAN'" loading="lazy" decoding="async"></div>
+      <div class="vehicle-info"><div class="vehicle-name">PINK VAN</div><div class="vehicle-meta">밴 | 4인승 | 이동 엄폐</div></div>
+    </div>
+    <div class="vehicle-card" data-vtype="car" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Vehicle/Land/Item_Vehicle_PanzerfaustCar_01_C.png','COUPE RB','스포츠카 | 2인승 | 최고 속도')">
+      <div class="vehicle-img-area"><img src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Vehicle/Land/Item_Vehicle_PanzerfaustCar_01_C.png" alt="CoupeRB"https://placehold.co/200x120/080a0c/f0c040?text=COUPE'" loading="lazy" decoding="async"></div>
+      <div class="vehicle-info"><div class="vehicle-name">COUPE RB</div><div class="vehicle-meta">스포츠카 | 2인승 | 최고속</div></div>
+    </div>
+    <div class="vehicle-card" data-vtype="car" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Vehicle/Land/Item_Vehicle_Lada_01_C.png','MIRADO','세단 | 4인승 | 미라마 전용')">
+      <div class="vehicle-img-area"><img src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Vehicle/Land/Item_Vehicle_Lada_01_C.png" alt="Mirado"https://placehold.co/200x120/080a0c/f0c040?text=MIRADO'" loading="lazy" decoding="async"></div>
+      <div class="vehicle-info"><div class="vehicle-name">MIRADO</div><div class="vehicle-meta">세단 | 4인승 | 미라마 전용</div></div>
+    </div>
+
+    <!-- BIKES -->
+    <div class="vehicle-card" data-vtype="bike" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Vehicle/Land/Item_Vehicle_Motorbike_03_C.png','MOTORBIKE','오토바이 | 2인승 | 기동성')">
+      <div class="vehicle-img-area"><img src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Vehicle/Land/Item_Vehicle_Motorbike_03_C.png" alt="Motorbike"https://placehold.co/200x120/080a0c/f0c040?text=MOTORBIKE'" loading="lazy" decoding="async"></div>
+      <div class="vehicle-info"><div class="vehicle-name">MOTORBIKE</div><div class="vehicle-meta">오토바이 | 2인승 | 기동성 최강</div></div>
+    </div>
+    <div class="vehicle-card" data-vtype="bike" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Vehicle/Land/Item_Vehicle_Motorbike_03_SideCar_C.png','MOTORBIKE (SIDECAR)','오토바이 | 3인승 | 사이드카')">
+      <div class="vehicle-img-area"><img src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Vehicle/Land/Item_Vehicle_Motorbike_03_SideCar_C.png" alt="Sidecar"https://placehold.co/200x120/080a0c/f0c040?text=SIDECAR'" loading="lazy" decoding="async"></div>
+      <div class="vehicle-info"><div class="vehicle-name">MOTORBIKE (SIDECAR)</div><div class="vehicle-meta">오토바이 | 3인승 | 사이드카</div></div>
+    </div>
+    <div class="vehicle-card" data-vtype="bike" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Vehicle/Land/Item_Vehicle_Tukshai_C.png','TUK TUK TUKSHAI','툭툭이 | 4인승 | 산호크')">
+      <div class="vehicle-img-area"><img src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Vehicle/Land/Item_Vehicle_Tukshai_C.png" alt="TukTuk"https://placehold.co/200x120/080a0c/f0c040?text=TUK-TUK'" loading="lazy" decoding="async"></div>
+      <div class="vehicle-info"><div class="vehicle-name">TUK-TUK TUKSHAI</div><div class="vehicle-meta">삼륜차 | 4인승 | 산호크 전용</div></div>
+    </div>
+
+    <!-- WATER -->
+    <div class="vehicle-card" data-vtype="water" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Vehicle/Water/Item_Vehicle_Aquarail_C.png','AQUARAIL','수상 오토바이 | 2인승 | 고속')">
+      <div class="vehicle-img-area"><img src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Vehicle/Water/Item_Vehicle_Aquarail_C.png" alt="Aquarail"https://placehold.co/200x120/080a0c/f0c040?text=AQUARAIL'" loading="lazy" decoding="async"></div>
+      <div class="vehicle-info"><div class="vehicle-name">AQUARAIL</div><div class="vehicle-meta">수상 오토바이 | 2인승</div></div>
+    </div>
+    <div class="vehicle-card" data-vtype="water" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Vehicle/Water/Item_Vehicle_MotorBoat_C.png','MOTORBOAT','보트 | 4인승')">
+      <div class="vehicle-img-area"><img src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Vehicle/Water/Item_Vehicle_MotorBoat_C.png" alt="Motorboat"https://placehold.co/200x120/080a0c/f0c040?text=MOTORBOAT'" loading="lazy" decoding="async"></div>
+      <div class="vehicle-info"><div class="vehicle-name">MOTORBOAT</div><div class="vehicle-meta">보트 | 4인승 | 수상 이동</div></div>
+    </div>
+
+    <!-- SPECIAL -->
+    <div class="vehicle-card" data-vtype="special" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Vehicle/Land/Item_Vehicle_Snowbike_C.png','SNOWBIKE','스노바이크 | 2인승 | 설원 전용')">
+      <div class="vehicle-img-area"><img src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Vehicle/Land/Item_Vehicle_Snowbike_C.png" alt="Snowbike"https://placehold.co/200x120/080a0c/f0c040?text=SNOWBIKE'" loading="lazy" decoding="async"></div>
+      <div class="vehicle-info"><div class="vehicle-name">SNOWBIKE</div><div class="vehicle-meta">스노바이크 | 2인승 | 비켄디 전용</div></div>
+    </div>
+    <div class="vehicle-card" data-vtype="special" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Vehicle/Land/Item_Vehicle_Snowmobile_C.png','SNOWMOBILE','스노모빌 | 4인승 | 설원')">
+      <div class="vehicle-img-area"><img src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Vehicle/Land/Item_Vehicle_Snowmobile_C.png" alt="Snowmobile"https://placehold.co/200x120/080a0c/f0c040?text=SNOWMOBILE'" loading="lazy" decoding="async"></div>
+      <div class="vehicle-info"><div class="vehicle-name">SNOWMOBILE</div><div class="vehicle-meta">스노모빌 | 4인승 | 비켄디 전용</div></div>
+    </div>
+    <div class="vehicle-card" data-vtype="special" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Vehicle/Air/Item_Vehicle_Helicopter_C.png','HELICOPTER','헬리콥터 | 다인승 | 에어리프트')">
+      <div class="vehicle-img-area"><img src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Vehicle/Air/Item_Vehicle_Helicopter_C.png" alt="Heli"https://placehold.co/200x120/080a0c/f0c040?text=HELICOPTER'" loading="lazy" decoding="async"></div>
+      <div class="vehicle-info"><div class="vehicle-name">HELICOPTER</div><div class="vehicle-meta">헬리콥터 | 공중 이동 | 태이고</div></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════ SECTION 7: ARMOR ═══════════ -->
+<section id="armor" class="section-wrap">
+  <div class="section-head">
+    <span class="section-num">07</span>
+    <h2 class="section-title">방어구 (Armor & Gear)</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="gear-grid">
+
+    <!-- HELMETS -->
+    <div class="gear-card" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Equipment/Head/Item_Head_E_01_Lv1_C.png','헬멧 레벨 1','방어구 | 40% 데미지 감소 | 레드존 보호 일부')">
+      <div class="gear-img-wrap"><img class="gear-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Equipment/Head/Item_Head_E_01_Lv1_C.png" alt="Helmet 1"https://placehold.co/150x80/080a0c/f0c040?text=HELMET+1'" loading="lazy" decoding="async"></div>
+      <div class="gear-name">헬멧 Lv.1</div>
+      <div class="gear-sub">머리 보호 30%</div>
+    </div>
+    <div class="gear-card" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Equipment/Head/Item_Head_E_01_Lv2_C.png','헬멧 레벨 2','방어구 | 더 높은 방어')">
+      <div class="gear-img-wrap"><img class="gear-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Equipment/Head/Item_Head_E_01_Lv2_C.png" alt="Helmet 2"https://placehold.co/150x80/080a0c/f0c040?text=HELMET+2'" loading="lazy" decoding="async"></div>
+      <div class="gear-name">헬멧 Lv.2</div>
+      <div class="gear-sub">머리 보호 40%</div>
+    </div>
+    <div class="gear-card" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Equipment/Head/Item_Head_E_01_Lv3_C.png','헬멧 레벨 3','방어구 | 최고 방어 | 에어드롭')">
+      <div class="gear-img-wrap"><img class="gear-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Equipment/Head/Item_Head_E_01_Lv3_C.png" alt="Helmet 3"https://placehold.co/150x80/080a0c/f0c040?text=HELMET+3'" loading="lazy" decoding="async"></div>
+      <div class="gear-name">헬멧 Lv.3</div>
+      <div class="gear-sub">머리 보호 55%</div>
+    </div>
+
+    <!-- VESTS -->
+    <div class="gear-card" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Equipment/Chest/Item_Armor_E_01_Lv1_C.png','방탄조끼 레벨 1','방어구 | 30% 방어')">
+      <div class="gear-img-wrap"><img class="gear-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Equipment/Chest/Item_Armor_E_01_Lv1_C.png" alt="Vest 1"https://placehold.co/150x80/080a0c/f0c040?text=VEST+1'" loading="lazy" decoding="async"></div>
+      <div class="gear-name">방탄조끼 Lv.1</div>
+      <div class="gear-sub">방어 30% | 내구도 200</div>
+    </div>
+    <div class="gear-card" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Equipment/Chest/Item_Armor_E_01_Lv2_C.png','방탄조끼 레벨 2','방어구 | 40% 방어')">
+      <div class="gear-img-wrap"><img class="gear-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Equipment/Chest/Item_Armor_E_01_Lv2_C.png" alt="Vest 2"https://placehold.co/150x80/080a0c/f0c040?text=VEST+2'" loading="lazy" decoding="async"></div>
+      <div class="gear-name">방탄조끼 Lv.2</div>
+      <div class="gear-sub">방어 40% | 내구도 220</div>
+    </div>
+    <div class="gear-card" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Equipment/Chest/Item_Armor_E_01_Lv3_C.png','방탄조끼 레벨 3','방어구 | 55% 방어 | 에어드롭')">
+      <div class="gear-img-wrap"><img class="gear-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Equipment/Chest/Item_Armor_E_01_Lv3_C.png" alt="Vest 3"https://placehold.co/150x80/080a0c/f0c040?text=VEST+3'" loading="lazy" decoding="async"></div>
+      <div class="gear-name">방탄조끼 Lv.3</div>
+      <div class="gear-sub">방어 55% | 내구도 250</div>
+    </div>
+
+    <!-- BAGS -->
+    <div class="gear-card" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Equipment/Back/Item_Back_E_01_Lv1_C.png','배낭 레벨 1','가방 | 수납 용량 150')">
+      <div class="gear-img-wrap"><img class="gear-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Equipment/Back/Item_Back_E_01_Lv1_C.png" alt="Bag 1"https://placehold.co/150x80/080a0c/f0c040?text=BAG+1'" loading="lazy" decoding="async"></div>
+      <div class="gear-name">배낭 Lv.1</div>
+      <div class="gear-sub">수납 용량 150</div>
+    </div>
+    <div class="gear-card" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Equipment/Back/Item_Back_E_01_Lv2_C.png','배낭 레벨 2','가방 | 수납 용량 200')">
+      <div class="gear-img-wrap"><img class="gear-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Equipment/Back/Item_Back_E_01_Lv2_C.png" alt="Bag 2"https://placehold.co/150x80/080a0c/f0c040?text=BAG+2'" loading="lazy" decoding="async"></div>
+      <div class="gear-name">배낭 Lv.2</div>
+      <div class="gear-sub">수납 용량 200</div>
+    </div>
+    <div class="gear-card" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Equipment/Back/Item_Back_E_01_Lv3_C.png','배낭 레벨 3','가방 | 수납 용량 250')">
+      <div class="gear-img-wrap"><img class="gear-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Equipment/Back/Item_Back_E_01_Lv3_C.png" alt="Bag 3"https://placehold.co/150x80/080a0c/f0c040?text=BAG+3'" loading="lazy" decoding="async"></div>
+      <div class="gear-name">배낭 Lv.3</div>
+      <div class="gear-sub">수납 용량 250 (최대)</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════ SECTION 8: HEALING ═══════════ -->
+<section id="healing" class="section-wrap">
+  <div class="section-head">
+    <span class="section-num">08</span>
+    <h2 class="section-title">회복 아이템 (Healing)</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="gear-grid">
+
+    <div class="gear-card" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Heal/Item_Heal_FirstAid_C.png','응급처치 (First Aid Kit)','회복 | 체력 +75 | 이동 불가')">
+      <div class="gear-img-wrap"><img class="gear-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Heal/Item_Heal_FirstAid_C.png" alt="First Aid"https://placehold.co/150x80/080a0c/f0c040?text=FIRST+AID'" loading="lazy" decoding="async"></div>
+      <div class="gear-name">응급처치</div>
+      <div class="gear-sub">체력 +75 | 6초 소요</div>
+    </div>
+    <div class="gear-card" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Heal/Item_Heal_MedKit_C.png','메딕킷 (MedKit)','회복 | 체력 완전 회복 | 8초')">
+      <div class="gear-img-wrap"><img class="gear-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Heal/Item_Heal_MedKit_C.png" alt="MedKit"https://placehold.co/150x80/080a0c/f0c040?text=MEDKIT'" loading="lazy" decoding="async"></div>
+      <div class="gear-name">메딕킷</div>
+      <div class="gear-sub">체력 100% 회복 | 8초</div>
+    </div>
+    <div class="gear-card" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Heal/Item_Heal_Bandage_C.png','붕대 (Bandage)','회복 | 체력 +10 | 빠른 회복')">
+      <div class="gear-img-wrap"><img class="gear-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Heal/Item_Heal_Bandage_C.png" alt="Bandage"https://placehold.co/150x80/080a0c/f0c040?text=BANDAGE'" loading="lazy" decoding="async"></div>
+      <div class="gear-name">붕대</div>
+      <div class="gear-sub">체력 +10 | 4초 소요</div>
+    </div>
+    <div class="gear-card" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Heal/Item_Heal_Ghillie_C.png','길리수트 (Ghillie Suit)','장비 | 은폐 특화 | 에어드롭')">
+      <div class="gear-img-wrap"><img class="gear-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Heal/Item_Heal_Ghillie_C.png" alt="Ghillie"https://placehold.co/150x80/080a0c/f0c040?text=GHILLIE'" loading="lazy" decoding="async"></div>
+      <div class="gear-name">길리수트</div>
+      <div class="gear-sub">위장 특화 | 에어드롭 전용</div>
+    </div>
+    <div class="gear-card" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Boost/Item_Boost_EnergyDrink_C.png','에너지 드링크','부스터 | 체력 자동 회복 +40')">
+      <div class="gear-img-wrap"><img class="gear-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Boost/Item_Boost_EnergyDrink_C.png" alt="EnergyDrink"https://placehold.co/150x80/080a0c/f0c040?text=ENERGY'" loading="lazy" decoding="async"></div>
+      <div class="gear-name">에너지 드링크</div>
+      <div class="gear-sub">부스터 | 자동 회복 +40</div>
+    </div>
+    <div class="gear-card" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Boost/Item_Boost_PainKiller_C.png','진통제 (Painkiller)','부스터 | 자동 회복 +60 | 강력')">
+      <div class="gear-img-wrap"><img class="gear-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Boost/Item_Boost_PainKiller_C.png" alt="Painkiller"https://placehold.co/150x80/080a0c/f0c040?text=PAINKILLER'" loading="lazy" decoding="async"></div>
+      <div class="gear-name">진통제</div>
+      <div class="gear-sub">부스터 | 자동 회복 +60</div>
+    </div>
+    <div class="gear-card" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Boost/Item_Boost_AdrenalineSyringe_C.png','아드레날린 주사','부스터 | 자동 회복 MAX | 에어드롭')">
+      <div class="gear-img-wrap"><img class="gear-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Boost/Item_Boost_AdrenalineSyringe_C.png" alt="Adrenaline"https://placehold.co/150x80/080a0c/f0c040?text=ADRENALINE'" loading="lazy" decoding="async"></div>
+      <div class="gear-name">아드레날린 주사</div>
+      <div class="gear-sub">부스터 최대 | 에어드롭</div>
+    </div>
+    <div class="gear-card" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Heal/Item_Heal_AED_C.png','자기소생 (Self AED)','회복 | 다운 상태에서 소생 | 태이고')">
+      <div class="gear-img-wrap"><img class="gear-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Heal/Item_Heal_AED_C.png" alt="SelfAED"https://placehold.co/150x80/080a0c/f0c040?text=AED'" loading="lazy" decoding="async"></div>
+      <div class="gear-name">자기소생 (AED)</div>
+      <div class="gear-sub">다운 상태에서 소생 | 태이고</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════ SECTION 9: THROWABLES ═══════════ -->
+<section id="throwables" class="section-wrap">
+  <div class="section-head">
+    <span class="section-num">09</span>
+    <h2 class="section-title">투척물 (Throwables)</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="gear-grid">
+
+    <div class="gear-card" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Throwable/Item_Weapon_Grenade_C.png','수류탄 (Frag Grenade)','투척물 | 폭발 피해 | 광역')">
+      <div class="gear-img-wrap"><img class="gear-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Throwable/Item_Weapon_Grenade_C.png" alt="Grenade"https://placehold.co/150x80/080a0c/f0c040?text=GRENADE'" loading="lazy" decoding="async"></div>
+      <div class="gear-name">수류탄</div>
+      <div class="gear-sub">폭발 | 광역 피해</div>
+    </div>
+    <div class="gear-card" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Throwable/Item_Weapon_Smoke_C.png','연막탄 (Smoke Grenade)','투척물 | 시야 차단 | 전략')">
+      <div class="gear-img-wrap"><img class="gear-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Throwable/Item_Weapon_Smoke_C.png" alt="Smoke"https://placehold.co/150x80/080a0c/f0c040?text=SMOKE'" loading="lazy" decoding="async"></div>
+      <div class="gear-name">연막탄</div>
+      <div class="gear-sub">시야 차단 | 전략적 이동</div>
+    </div>
+    <div class="gear-card" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Throwable/Item_Weapon_FlashBang_C.png','섬광탄 (Flashbang)','투척물 | 일시 실명 | 기습')">
+      <div class="gear-img-wrap"><img class="gear-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Throwable/Item_Weapon_FlashBang_C.png" alt="Flashbang"https://placehold.co/150x80/080a0c/f0c040?text=FLASH'" loading="lazy" decoding="async"></div>
+      <div class="gear-name">섬광탄</div>
+      <div class="gear-sub">일시 실명 | 기습 진입</div>
+    </div>
+    <div class="gear-card" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Throwable/Item_Weapon_Molotov_C.png','화염병 (Molotov)','투척물 | 화염 범위 | 지속 피해')">
+      <div class="gear-img-wrap"><img class="gear-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Throwable/Item_Weapon_Molotov_C.png" alt="Molotov"https://placehold.co/150x80/080a0c/f0c040?text=MOLOTOV'" loading="lazy" decoding="async"></div>
+      <div class="gear-name">화염병</div>
+      <div class="gear-sub">화염 범위 | 지속 피해</div>
+    </div>
+    <div class="gear-card" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Throwable/Item_Weapon_StunGrenade_C.png','스턴 수류탄','투척물 | 이동 속도 감소')">
+      <div class="gear-img-wrap"><img class="gear-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Throwable/Item_Weapon_StunGrenade_C.png" alt="Stun"https://placehold.co/150x80/080a0c/f0c040?text=STUN'" loading="lazy" decoding="async"></div>
+      <div class="gear-name">스턴 수류탄</div>
+      <div class="gear-sub">이동 속도 감소</div>
+    </div>
+    <div class="gear-card" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Throwable/Item_Weapon_C4_C.png','C4 폭탄','투척물 | 원격 기폭 | 강력 폭발')">
+      <div class="gear-img-wrap"><img class="gear-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Throwable/Item_Weapon_C4_C.png" alt="C4"https://placehold.co/150x80/080a0c/f0c040?text=C4'" loading="lazy" decoding="async"></div>
+      <div class="gear-name">C4 폭탄</div>
+      <div class="gear-sub">원격 기폭 | 강력 폭발</div>
+    </div>
+    <div class="gear-card" onclick="openLB('https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Throwable/Item_Weapon_Decoy_C.png','음향 수류탄 (Decoy)','투척물 | 총소리 위장 | 교란')">
+      <div class="gear-img-wrap"><img class="gear-img" src="https://cdn.jsdelivr.net/gh/pubg/api-assets@master/Assets/Item/Throwable/Item_Weapon_Decoy_C.png" alt="Decoy"https://placehold.co/150x80/080a0c/f0c040?text=DECOY'" loading="lazy" decoding="async"></div>
+      <div class="gear-name">음향 수류탄</div>
+      <div class="gear-sub">총소리 위장 | 교란 전술</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════ LIGHTBOX ═══════════ -->
+<div id="lightbox" onclick="closeLBOverlay(event)">
+  <span class="lb-close" onclick="closeLB()">✕</span>
+  <span class="lb-nav lb-prev" onclick="lbPrev(event)">‹</span>
+  <span class="lb-nav lb-next" onclick="lbNext(event)">›</span>
+  <div class="lb-img-wrap" onclick="event.stopPropagation()">
+    <img class="lb-img" id="lbImg" src="" alt="">
+  </div>
+  <div class="lb-caption" id="lbCaption"></div>
+  <div class="lb-sub" id="lbSub"></div>
+</div>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <p style="color:var(--gold); font-size:13px;">
+    ⚠️ 이 페이지는 <strong>외국인이 운영하는 배그 서버</strong>의 교육 목적 PUBG 가이드입니다.<br>
+    맵 이미지 출처: <a href="https://github.com/pubg/api-assets" style="color:var(--gold)">pubg/api-assets</a> — PUBG Developer ToS 준수
+  </p>
+  <br>
+  <p style="opacity:0.35; font-size:11px;">
+    PUBG: BATTLEGROUNDS © Krafton, Inc. 이 사이트는 Krafton의 공식 사이트가 아닙니다.<br>
+    Not an official Krafton site. For educational use only. Unauthorized redistribution prohibited.
+  </p>
+</footer>
+
+<script>
+// ═══════════ LIGHTBOX ENGINE ═══════════
+const BASE = 'https://cdn.jsdelivr.net/gh/pubg/api-assets@master/';
+let lbGroup = [];
+let lbIdx = 0;
+
+// Collect all item cards in a grid when one is clicked
+function addToLBGroup(el, src, cap, sub) {
+  const grid = el.closest('.items-grid, .vehicles-grid, .gear-grid, .attach-grid');
+  if (grid) {
+    const cards = Array.from(grid.querySelectorAll('[data-wtype],[data-vtype],[data-atype]'))
+      .filter(c => c.style.display !== 'none');
+    lbGroup = cards.map(c => {
+      const oc = c.getAttribute('onclick') || '';
+      const m = oc.match(/addToLBGroup\(this,'([^']+)','([^']+)','([^']*)'\)/);
+      if (m) return { src: m[1], cap: m[2], sub: m[3] };
+      const m2 = oc.match(/openLB\('([^']+)','([^']+)','([^']*)'\)/);
+      if (m2) return { src: m2[1], cap: m2[2], sub: m2[3] };
+      return null;
+    }).filter(Boolean);
+    const idx = cards.indexOf(el);
+    lbIdx = idx >= 0 ? idx : 0;
+  } else {
+    lbGroup = [{ src, cap, sub }];
+    lbIdx = 0;
+  }
+  openLBAt(lbIdx);
+}
+
+function openLB(src, cap, sub) {
+  lbGroup = [{ src, cap, sub }];
+  lbIdx = 0;
+  openLBAt(0);
+}
+
+function openLBAt(i) {
+  if (!lbGroup.length) return;
+  lbIdx = (i + lbGroup.length) % lbGroup.length;
+  const item = lbGroup[lbIdx];
+  document.getElementById('lbImg').src = item.src;
+  document.getElementById('lbCaption').textContent = item.cap || '';
+  document.getElementById('lbSub').textContent = item.sub || '';
+  const lb = document.getElementById('lightbox');
+  lb.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  // Re-trigger animation
+  const img = document.getElementById('lbImg');
+  img.classList.remove('lb-img');
+  void img.offsetWidth;
+  img.classList.add('lb-img');
+}
+
+function closeLB() {
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function closeLBOverlay(e) {
+  if (e.target === document.getElementById('lightbox')) closeLB();
+}
+
+function lbPrev(e) { e.stopPropagation(); openLBAt(lbIdx - 1); }
+function lbNext(e) { e.stopPropagation(); openLBAt(lbIdx + 1); }
+
+document.addEventListener('keydown', e => {
+  const lb = document.getElementById('lightbox');
+  if (!lb.classList.contains('active')) return;
+  if (e.key === 'Escape') closeLB();
+  if (e.key === 'ArrowLeft') openLBAt(lbIdx - 1);
+  if (e.key === 'ArrowRight') openLBAt(lbIdx + 1);
+});
+
+// ═══════════ FILTER ENGINE ═══════════
+function filterItems(gridId, attr, val, btn, barId) {
+  const grid = document.getElementById(gridId);
+  const dataAttr = attr === 'wtype' ? 'wtype' : attr === 'vtype' ? 'vtype' : 'atype';
+  grid.querySelectorAll('[data-' + dataAttr + ']').forEach(card => {
+    card.style.display = (val === 'all' || card.dataset[dataAttr] === val) ? '' : 'none';
+  });
+  const bar = typeof barId === 'string' ? document.getElementById(barId) : barId;
+  if (bar) bar.querySelectorAll('.ftab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  lbGroup = [];
+}
+
+// ═══════════ SCROLL REVEAL ═══════════
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.item-card, .vehicle-card, .gear-card, .attach-card, .basic-card, .map-tile').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
+  observer.observe(el);
+});
+</script>
+<!-- ═══════════ IMAGE FALLBACK & QUALITY SCRIPT ═══════════ -->
+<script>
+(function() {
+  const CDN = 'https://cdn.jsdelivr.net/gh/pubg/api-assets@master';
+  const RAW = 'https://raw.githubusercontent.com/pubg/api-assets/master';
+  const PH  = 'https://placehold.co';
+
+  function getPath(src) {
+    if (src.startsWith(CDN)) return src.replace(CDN, '');
+    if (src.startsWith(RAW)) return src.replace(RAW, '');
+    return null;
+  }
+
+  function fallback(img) {
+    const src = img.src;
+    const path = getPath(src);
+    // 1st fallback: jsDelivr → raw GitHub
+    if (src.startsWith(CDN) && path) {
+      img.src = RAW + path;
+      return;
+    }
+    // 2nd fallback: raw GitHub → cache buster
+    if (src.startsWith(RAW) && path && !src.includes('?cb=')) {
+      img.src = RAW + path + '?cb=1';
+      return;
+    }
+    // Final: placeholder
+    img.onerror = null;
+    const label = encodeURIComponent((img.alt || 'IMG').substring(0, 10).toUpperCase());
+    const sz = img.classList.contains('item-img') ? '200x110'
+             : img.classList.contains('gear-img')  ? '160x90'
+             : img.id === 'lbImg'                  ? '800x500'
+             : '180x110';
+    img.src = PH + '/' + sz + '/0d1015/f0c040?text=' + label;
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('img').forEach(function(img) {
+      img.onerror = function() { fallback(this); };
+    });
+  });
+
+  // Fix any already-broken images after full page load
+  window.addEventListener('load', function() {
+    document.querySelectorAll('img').forEach(function(img) {
+      if (img.id === 'lbImg') return;
+      if (!img.complete || img.naturalWidth === 0) {
+        var s = img.src; img.src = ''; img.src = s;
+      }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
